@@ -25,7 +25,7 @@
 <meta property="og:description" content="Linux 兄弟连1. Linux 系统简介省略  LAMP： 支撑互联网的开源技术  Linux    操作系统 Apache Web服务器 MySQL 数据库 PHP      编程语言   2. Linux 系统安装硬件设备文件名    硬 件 设备文件名    IDE硬盘 /dev/hd[a-d]   SCSI/SATA/USB硬盘 /dev/sd[a-p]   光驱 /dev/cdrom">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="d:%5CWorkspaces%5CTypora%5Cimage%5CI59.png">
-<meta property="og:updated_time" content="2019-08-16T07:50:40.051Z">
+<meta property="og:updated_time" content="2019-08-17T02:39:04.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 兄弟连 | Hexo">
 <meta name="twitter:description" content="Linux 兄弟连1. Linux 系统简介省略  LAMP： 支撑互联网的开源技术  Linux    操作系统 Apache Web服务器 MySQL 数据库 PHP      编程语言   2. Linux 系统安装硬件设备文件名    硬 件 设备文件名    IDE硬盘 /dev/hd[a-d]   SCSI/SATA/USB硬盘 /dev/sd[a-p]   光驱 /dev/cdrom">
@@ -256,35 +256,35 @@ classes that you can use:
 </thead>
 <tbody><tr>
 <td>/bin/</td>
-<td>存放系统命令的目录，普通用户和超级用户都可以执行。不过放在/bin下的<br>命令在单用户模式下也可以执行</td>
+<td>存放系统命令的目录，普通用户和超级用户都可以执行。不过放在/bin下的命令在单用户模式下也可以执行</td>
 </tr>
 <tr>
 <td>/sbin/</td>
-<td>保存和系统环境设置相关的命令，只有超级用户可以使用这些命令进行系统<br>环境设置，但是有些命令可以允许普通用户查看</td>
+<td>保存和系统环境设置相关的命令，只有超级用户可以使用这些命令进行系统环境设置，但是有些命令可以允许普通用户查看</td>
 </tr>
 <tr>
 <td>/usr/bin/</td>
-<td>存放系统命令的目录，普通用户和超级用户都可以执行。这些命令和系统启<br>动无关，在单用户模式下不能执行</td>
+<td>存放系统命令的目录，普通用户和超级用户都可以执行。这些命令和系统启动无关，在单用户模式下不能执行</td>
 </tr>
 <tr>
 <td>/usr/sbin/</td>
-<td>存放根文件系统不必要的系统管理命令，例如多数服务程序。只有超级用户<br>可以使用。大家其实可以注意到Linux的系统，在所有“sbin”目录中保存的<br>命令只有超级用户可以使用，“bin”目录中保存的命令所有用户都可以使用</td>
+<td>存放根文件系统不必要的系统管理命令，例如多数服务程序。只有超级用户可以使用。大家其实可以注意到Linux的系统，在所有“sbin”目录中保存的命令只有超级用户可以使用，“bin”目录中保存的命令所有用户都可以使用</td>
 </tr>
 <tr>
 <td>/boot/</td>
-<td>系统启动目录，保存系统启动相关的文件，如内核文件和启动引导程序<br>（grub）文件等</td>
+<td>系统启动目录，保存系统启动相关的文件，如内核文件和启动引导程序（grub）文件等</td>
 </tr>
 <tr>
 <td>/dev/</td>
-<td>设备文件保存位置。我们已经说过Linux中所有内容以文件形式保存，包括硬<br>件。那么这个目录就是用来保存所有硬件设备文件的</td>
+<td>设备文件保存位置。我们已经说过Linux中所有内容以文件形式保存，包括硬件。那么这个目录就是用来保存所有硬件设备文件的</td>
 </tr>
 <tr>
 <td>/etc/</td>
-<td>配置文件保存位置。系统内所有采用默认安装方式（rpm安装）的服务的配<br>置文件全部都保存在这个目录当中，如用户账户和密码，服务的启动脚本，<br>常用服务的配置文件等</td>
+<td>配置文件保存位置。系统内所有采用默认安装方式（rpm安装）的服务的配置文件全部都保存在这个目录当中，如用户账户和密码，服务的启动脚本，常用服务的配置文件等</td>
 </tr>
 <tr>
 <td>/home/</td>
-<td>普通用户的家目录。建立每个用户时，每个用户要有一个默认登录位置，这个<br>位置就是这个用户的家目录，所有普通用户的家目录就是在/home下建立一个和<br>用户名相同的目录。如用户user1的家目录就是/home/user1</td>
+<td>普通用户的家目录。建立每个用户时，每个用户要有一个默认登录位置，这个位置就是这个用户的家目录，所有普通用户的家目录就是在/home下建立一个和用户名相同的目录。如用户user1的家目录就是/home/user1</td>
 </tr>
 <tr>
 <td>/lib/</td>
@@ -292,7 +292,7 @@ classes that you can use:
 </tr>
 <tr>
 <td>/lost+found/</td>
-<td>当系统意外崩溃或机器意外关机，而产生一些文件碎片放在这里。当系统启动<br>的过程中fsck工具会检查这里，并修复已经损坏的文件系统。这个目录只在每个<br>分区中出现，例如/lost+found就是根分区的备份恢复目录，/boot/lost+found就是<br>/boot分区的备份恢复目录</td>
+<td>当系统意外崩溃或机器意外关机，而产生一些文件碎片放在这里。当系统启动的过程中fsck工具会检查这里，并修复已经损坏的文件系统。这个目录只在每个分区中出现，例如/lost+found就是根分区的备份恢复目录，/boot/lost+found就是/boot分区的备份恢复目录</td>
 </tr>
 <tr>
 <td>/media/</td>
@@ -300,39 +300,39 @@ classes that you can use:
 </tr>
 <tr>
 <td>/mnt/</td>
-<td>挂载目录，早期Linux中只有这一个挂载目录，并没有细分。现在这个目录系统<br>建议挂载额外设备，如U盘，移动硬盘和其他操作系统的分区</td>
+<td>挂载目录，早期Linux中只有这一个挂载目录，并没有细分。现在这个目录系统建议挂载额外设备，如U盘，移动硬盘和其他操作系统的分区</td>
 </tr>
 <tr>
 <td>/misc/</td>
-<td>挂载目录。系统建议用来挂载NFS服务的共享目录。我们在刚刚已经解释了挂载，<br>童鞋们应该知道只要是一个已经建立的空目录就可以作为挂载点。那么系统虽<br>然准备了三个默认挂载目录/media、/mnt、/misc，但是到底在哪个目录中挂载什<br>么设备都可以由管理员自己决定。例如超哥接触Linux的时候，默认挂载目录只<br>有/mnt一个，所以养成了在/mnt下建立不同目录挂载不同设备的习惯。如<br>/mnt/cdrom挂载光盘，/mnt/usb挂载U盘，这都是可以的</td>
+<td>挂载目录。系统建议用来挂载NFS服务的共享目录。我们在刚刚已经解释了挂载，童鞋们应该知道只要是一个已经建立的空目录就可以作为挂载点。那么系统虽然准备了三个默认挂载目录/media、/mnt、/misc，但是到底在哪个目录中挂载什么设备都可以由管理员自己决定。例如超哥接触Linux的时候，默认挂载目录只有/mnt一个，所以养成了在/mnt下建立不同目录挂载不同设备的习惯。如/mnt/cdrom挂载光盘，/mnt/usb挂载U盘，这都是可以的</td>
 </tr>
 <tr>
 <td>/opt/</td>
-<td>第三方安装的软件保存位置。这个目录就是放置和安装其他软件的位置，我手<br>工安装的源码包软件都可以安装到这个目录当中。不过我还是更加习惯把软件<br>放置到/usr/local/目录当中，也就是说/usr/local/目录也可以用来安装软件</td>
+<td>第三方安装的软件保存位置。这个目录就是放置和安装其他软件的位置，我手工安装的源码包软件都可以安装到这个目录当中。不过我还是更加习惯把软件放置到/usr/local/目录当中，也就是说/usr/local/目录也可以用来安装软件</td>
 </tr>
 <tr>
 <td>/proc/</td>
-<td>虚拟文件系统，该目录中的数据并不保存到硬盘当中，而是保存到内存<br>当中。主要保存系统的内核，进程，外部设备状态和网络状态灯。如<br>/proc/cpuinfo是保存CPU信息的，/proc/devices是保存设备驱动的列表的，<br>/proc/filesystems是保存文件系统列表的，/proc/net/是保存网络协议信息的</td>
+<td>虚拟文件系统，该目录中的数据并不保存到硬盘当中，而是保存到内存当中。主要保存系统的内核，进程，外部设备状态和网络状态灯。如/proc/cpuinfo是保存CPU信息的，/proc/devices是保存设备驱动的列表的，/proc/filesystems是保存文件系统列表的，/proc/net/是保存网络协议信息的</td>
 </tr>
 <tr>
 <td>/sys/</td>
-<td>虚拟文件系统。和/proc目录相似，都是保存在内存当中的，主要是保存<br>于内核相关信息的</td>
+<td>虚拟文件系统。和/proc目录相似，都是保存在内存当中的，主要是保存于内核相关信息的</td>
 </tr>
 <tr>
 <td>/root/</td>
-<td>超级用户的家目录。普通用户家目录在“/home”下，超级用于家目录直<br>接在“/”下</td>
+<td>超级用户的家目录。普通用户家目录在“/home”下，超级用于家目录直接在“/”下</td>
 </tr>
 <tr>
 <td>/srv/</td>
-<td>服务数据目录。一些系统服务启动之后，可以在这个目录中保存所需要<br>的数据</td>
+<td>服务数据目录。一些系统服务启动之后，可以在这个目录中保存所需要的数据</td>
 </tr>
 <tr>
 <td>/tmp/</td>
-<td>临时目录。系统存放临时文件的目录，该目录下所有用户都可以访问和<br>写入。我们建议此目录中不能保存重要数据，最好每次开机都把该目录<br>清空</td>
+<td>临时目录。系统存放临时文件的目录，该目录下所有用户都可以访问和写入。我们建议此目录中不能保存重要数据，最好每次开机都把该目录清空</td>
 </tr>
 <tr>
 <td>/usr/</td>
-<td>系统软件资源目录。注意usr不是user的缩写，而是“Unix Softwre<br>Resource”的缩写，所以不是存放用户数据，而是存放系统软件资源的目<br>录。系统中安装的软件大多数保存在这里，所以除了/usr/bin/和/usr/sbin/<br>这两个目录，我在介绍几个/usr/下的二级目录</td>
+<td>系统软件资源目录。注意usr不是user的缩写，而是“Unix SoftwreResource”的缩写，所以不是存放用户数据，而是存放系统软件资源的目录。系统中安装的软件大多数保存在这里，所以除了/usr/bin/和/usr/sbin/这两个目录，我在介绍几个/usr/下的二级目录</td>
 </tr>
 <tr>
 <td>/var/</td>
@@ -348,7 +348,179 @@ classes that you can use:
 <li>合理分配权限</li>
 <li>定期备份重要数据和日志</li>
 </ul>
-<h3 id="3-Linux常用命令"><a href="#3-Linux常用命令" class="headerlink" title="3. Linux常用命令"></a>3. Linux常用命令</h3><h3 id="4-文本编辑器"><a href="#4-文本编辑器" class="headerlink" title="4. 文本编辑器"></a>4. 文本编辑器</h3><h3 id="5-软件包管理简介"><a href="#5-软件包管理简介" class="headerlink" title="5. 软件包管理简介"></a>5. 软件包管理简介</h3><h3 id="6-用户和用户组管理"><a href="#6-用户和用户组管理" class="headerlink" title="6. 用户和用户组管理"></a>6. 用户和用户组管理</h3><h3 id="7-权限管理"><a href="#7-权限管理" class="headerlink" title="7. 权限管理"></a>7. 权限管理</h3><h3 id="8-文件管理系统"><a href="#8-文件管理系统" class="headerlink" title="8. 文件管理系统"></a>8. 文件管理系统</h3><hr>
+<h3 id="3-Linux常用命令"><a href="#3-Linux常用命令" class="headerlink" title="3. Linux常用命令"></a>3. Linux常用命令</h3><h4 id="3-1-文件处理命令"><a href="#3-1-文件处理命令" class="headerlink" title="3.1 文件处理命令"></a>3.1 文件处理命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ls -la /etc		#list</span><br><span class="line">语法：ls 选项[-ald] [文件或目录]</span><br><span class="line">-a 显示所有文件，包括隐藏文件</span><br><span class="line">-l 详细信息显示</span><br><span class="line">-d 查看目录属性</span><br><span class="line"></span><br><span class="line">-rw-r--r--</span><br><span class="line"> - 文件类型（- 文件 d 目录 l 软链接文件）</span><br><span class="line"> rw- r-- r--</span><br><span class="line"> u   g   o</span><br><span class="line"> u所有者 g所属组 o其他人</span><br><span class="line"> r读 w写 x执行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p [目录名] 	#功能描述：创建新目录</span><br><span class="line">-p 递归创建</span><br><span class="line">mkdir -p /tmp/Japan/boduo</span><br><span class="line">mkdir /tmp/Japan/longze /tmp/Japan/cangjing</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd [目录]		#功能描述：切换目录，shell内置命令</span><br><span class="line">cd /tmp/Japan/boduo 切换到指定目录</span><br><span class="line">cd .. 回到上一级目录</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd		#功能描述：显示当前目录 print working directory</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rmdir	#功能描述： 删除空目录，remove empty directories</span><br><span class="line">rmdir /tmp/Japan/boduo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp		#功能描述：复制文件或目录</span><br><span class="line">语法：cp -rp [原文件或目录] [目标目录]</span><br><span class="line">-r 复制目录</span><br><span class="line">-p 保留文件属性</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv [原文件或目录] [目标目录]		#功能描述：剪切文件、改名</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf [文件或目录]		#功能描述：删除文件</span><br><span class="line">-r 删除目录</span><br><span class="line">-f 强制执行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch		#功能描述：创建空文件</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat [文件名]	#功能描述：显示文件内容</span><br><span class="line"> -n 显示行号</span><br><span class="line">范例： $ cat /etc/issue</span><br><span class="line"></span><br><span class="line">tac [文件名]	#功能描述：显示文件内容（反向列示）</span><br><span class="line">范例： $ tac /etc/issue</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">more [文件名]	#功能描述：分页显示文件内容</span><br><span class="line"> (空格) 或f 翻页</span><br><span class="line"> (Enter) 换行</span><br><span class="line"> q或Q 退出</span><br><span class="line">范例： $ more /etc/services</span><br><span class="line"></span><br><span class="line">less [文件名]	#功能描述：分页显示文件内容（可向上翻页）</span><br><span class="line">范例： $ less /etc/services</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">head [文件名]	#功能描述：显示文件前面几行</span><br><span class="line">-n 指定行数</span><br><span class="line">范例： $ head -n 20 /etc/services</span><br><span class="line"></span><br><span class="line">tail [文件名]	#功能描述：显示文件后面几行</span><br><span class="line">-n 指定行数</span><br><span class="line">-f 动态显示文件末尾内容</span><br><span class="line">范例： $ tail -n 18 /etc/services</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ln -s [原文件] [目标文件]	#功能描述：生成链接文件</span><br><span class="line"> -s 创建软链接</span><br><span class="line"></span><br><span class="line">范例：</span><br><span class="line"><span class="meta"> $</span><span class="bash"> ln -s /etc/issue /tmp/issue.soft</span></span><br><span class="line"> 创建文件/etc/issue的软链接/tmp/issue.soft</span><br><span class="line"><span class="meta"> $</span><span class="bash"> ln /etc/issue /tmp/issue.hard</span></span><br><span class="line"> 创建文件/etc/issue的硬链接/tmp/issue.hard</span><br></pre></td></tr></table></figure>
+
+<h5 id="软链接特征："><a href="#软链接特征：" class="headerlink" title="软链接特征："></a>软链接特征：</h5><p>类似Windows快捷方式</p>
+<p>1、lrwxrwxrwx l 软链接，软链接文件权限都为rwxrwxrwx<br>2、文件大小-只是符号链接<br>3、/tmp/issue.soft -&gt; /etc/issue箭头指向原文件</p>
+<h5 id="硬链接特征："><a href="#硬链接特征：" class="headerlink" title="硬链接特征："></a>硬链接特征：</h5><p>1、拷贝cp -p + 同步更新 echo “this is a test” &gt;&gt; /etc/motd<br>2、可通过i节点识别<br>3、不能跨分区<br>4、不能针对目录使用</p>
+<h4 id="3-2-权限管理命令"><a href="#3-2-权限管理命令" class="headerlink" title="3.2 权限管理命令"></a>3.2 权限管理命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chmod [&#123;ugoa&#125;&#123;+-=&#125;&#123;rwx&#125;] [文件或目录]</span><br><span class="line"> [mode=421 ] [文件或目录]</span><br><span class="line"> -R 递归修改</span><br><span class="line">chmod g+w testfile</span><br><span class="line">chmod -R 777 testdir</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>权限</th>
+<th>对文件的含义</th>
+<th>对目录的含义</th>
+<th>数字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>读权限</td>
+<td>可以查看文件内容</td>
+<td>可以列出目录中的内容</td>
+<td>4</td>
+</tr>
+<tr>
+<td>w</td>
+<td>写权限</td>
+<td>可以修改文件内容</td>
+<td>可以在目录中创建、删除文件</td>
+<td>2</td>
+</tr>
+<tr>
+<td>x</td>
+<td>执行权限</td>
+<td>可以执行文件</td>
+<td>可以进入目录</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chown [用户] [文件或目录]		#功能描述：改变文件或目录的所有者</span><br><span class="line">范例：$ chown dong file		#改变文件file的所有者为dong</span><br><span class="line">chown a:b file</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chgrp [用户组] [文件或目录]		#功能描述：改变文件或目录的所属组</span><br><span class="line">范例：$ chgrp dong file	#改变文件file的所属组为dong</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">umask [-S]			#功能描述：显示、设置文件的缺省权限,the user file-creation mask</span><br><span class="line"> -S 以rwx形式显示新建文件缺省权限</span><br><span class="line">范例： $ umask -S</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-文件搜索命令"><a href="#3-3-文件搜索命令" class="headerlink" title="3.3 文件搜索命令"></a>3.3 文件搜索命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">find [搜索范围] [匹配条件]		#功能描述：文件搜索</span><br><span class="line"><span class="meta">$</span><span class="bash"> find /etc -name init		<span class="comment">#在目录/etc中查找文件init</span></span></span><br><span class="line"> -iname 不区分大小写</span><br><span class="line"><span class="meta"> $</span><span class="bash"> find / -size +204800		<span class="comment">#在根目录下查找大于100MB的文件</span></span></span><br><span class="line"> +n 大于 -n 小于 n 等于</span><br><span class="line"><span class="meta"> $</span><span class="bash"> find /home -user shenchao	<span class="comment">#在根目录下查找所有者为shenchao的文件</span></span></span><br><span class="line"> -group 根据所属组查找</span><br><span class="line"> </span><br><span class="line"><span class="meta"> $</span><span class="bash"> find /etc -cmin -5	<span class="comment">#在/etc下查找5分钟内被修改过属性的文件和目录</span></span></span><br><span class="line"> -amin 访问时间 access</span><br><span class="line"> -cmin 文件属性 change</span><br><span class="line"> -mmin 文件内容 modify</span><br><span class="line"> </span><br><span class="line"><span class="meta"> $</span><span class="bash"> find /etc -size +163840 -a -size -204800	<span class="comment">#在/etc下查找大于80MB小于100MB的文件</span></span></span><br><span class="line"> -a 两个条件同时满足</span><br><span class="line"> -o 两个条件满足任意一个即可</span><br><span class="line"><span class="meta"> $</span><span class="bash"> find /etc -name inittab -<span class="built_in">exec</span> ls -l &#123;&#125; \;	<span class="comment">#在/etc下查找inittab文件并显示其详细信息</span></span></span><br><span class="line"> -exec/-ok 命令 &#123;&#125; \; 对搜索结果执行操作</span><br><span class="line"> </span><br><span class="line"> -type 根据文件类型查找</span><br><span class="line"> f 文件 d 目录 l 软链接文件</span><br><span class="line"> -inum 根据i节点查找</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locate 文件名	#功能描述：在文件资料库中查找文件</span><br><span class="line">范例：$ locate inittab</span><br><span class="line">updatedb	#需要updatedb更新数据库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which 命令	#功能描述：搜索命令所在目录及别名信息</span><br><span class="line">范例：$ which ls</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">whereis [命令名称]	#功能描述：搜索命令所在目录及帮助文档路径</span><br><span class="line">范例：$ whereis ls</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep -iv [指定字串] [文件]	#功能描述：在文件中搜寻字串匹配的行并输出</span><br><span class="line"> -i 不区分大小写</span><br><span class="line"> -v 排除指定字串</span><br><span class="line">范例：# grep mysql /root/install.log</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-帮助命令"><a href="#3-4-帮助命令" class="headerlink" title="3.4 帮助命令"></a>3.4 帮助命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">man [命令或配置文件]	#功能描述：获得帮助信息，mannul</span><br><span class="line">范例： $ man ls	#查看ls命令的帮助信息</span><br><span class="line"><span class="meta"> $</span><span class="bash"> man services	 <span class="comment">#查看配置文件services的帮助信息</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">help 命令	#功能描述：获得Shell内置命令的帮助信息</span><br><span class="line">范例： $ help umask	#查看umask命令的帮助信息</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-5-用户管理命令"><a href="#3-5-用户管理命令" class="headerlink" title="3.5 用户管理命令"></a>3.5 用户管理命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd 用户名	#功能描述：添加新用户</span><br><span class="line">范例： $ useradd dong2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">passwd 用户名	#功能描述：设置用户密码</span><br><span class="line">范例： $ passwd dong2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">who		#功能描述：查看登录用户信息</span><br><span class="line">范例： $ who</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">w		#功能描述：查看登录用户详细信息</span><br><span class="line">范例： $ w</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-6-压缩解压命令"><a href="#3-6-压缩解压命令" class="headerlink" title="3.6 压缩解压命令"></a>3.6 压缩解压命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip [文件]		#功能描述：压缩文件，GNU zip，压缩后文件格式：.gz</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gunzip [压缩文件]	#功能描述：解压缩.gz的压缩文件</span><br><span class="line">范例： $ gunzip boduo.gz</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tar 选项[-zcf] [压缩后文件名] [目录]	#功能描述：打包目录，压缩后文件格式：.tar.gz </span><br><span class="line"> -c 打包</span><br><span class="line"> -v 显示详细信息</span><br><span class="line"> -f 指定文件名</span><br><span class="line"> -z 打包同时压缩</span><br><span class="line"><span class="meta"> $</span><span class="bash"> tar -zcf dir.tar.gz dir	<span class="comment">#将目录dir打包并压缩为.tar.gz文件</span></span></span><br><span class="line"> </span><br><span class="line"> -x 解包</span><br><span class="line"> -z 解压缩</span><br><span class="line"><span class="meta"> $</span><span class="bash"> tar -zxvf dir.tar.gz	<span class="comment">#压缩解压</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zip 选项[-r] [压缩后文件名] [文件或目录]	#功能描述：压缩文件或目录，压缩后文件格式：.zip </span><br><span class="line"> -r 压缩目录</span><br><span class="line"><span class="meta">$</span><span class="bash"> zip file.zip file	<span class="comment">#压缩文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> zip -r dir.zip dir	<span class="comment">#压缩目录</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip [压缩文件]	#功能描述：解压.zip的压缩文件</span><br><span class="line">范例：$ unzip test.zip</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bzip2 选项 [-k] [文件]		#功能描述：压缩文件，压缩后文件格式：.bz2</span><br><span class="line"> -k 产生压缩文件后保留原文件</span><br><span class="line"><span class="meta"> $</span><span class="bash"> bzip2 -k file</span></span><br><span class="line"><span class="meta"> $</span><span class="bash"> tar -cjf dir.tar.bz2 dir</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bunzip2 选项 [-k] [压缩文件]	#功能描述：解压缩</span><br><span class="line"> -k 解压缩后保留原文件</span><br><span class="line"><span class="meta"> $</span><span class="bash"> bunzip2 -k file.bz2</span></span><br><span class="line"><span class="meta"> $</span><span class="bash"> tar -xjf dir.tar.bz2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-7-网络命令"><a href="#3-7-网络命令" class="headerlink" title="3.7 网络命令"></a>3.7 网络命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write &lt;用户名&gt;	#功能描述：给用户发信息，以Ctrl+D保存结束</span><br><span class="line">范例： $ write linzhiling</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wall [message]	#功能描述：发广播信息,write all</span><br><span class="line">范例： $ wall ShenChao is a honest man!</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ping 选项 IP地址	#功能描述：测试网络连通性</span><br><span class="line"> -c 指定发送次数</span><br><span class="line">范例： $ ping 192.168.1.156</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig 网卡名称 IP地址	#功能描述：查看和设置网卡信息,interface configure</span><br><span class="line">范例：$ ifconfig eth0 192.168.8.250</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mail [用户名]	#功能描述：查看发送电子邮件</span><br><span class="line">范例：$ mail root</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">last	#功能描述：列出目前与过去登入系统的用户信息</span><br><span class="line">范例：$ last</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lastlog	#功能描述：检查某特定用户上次登录的时间</span><br><span class="line">范例：$ lastlog</span><br><span class="line"><span class="meta"> $</span><span class="bash"> lastlog -u 502</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">traceroute	#功能描述：显示数据包到主机间的路径</span><br><span class="line">范例：$ traceroute www.lampbrother.net</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">netstat [选项]	#功能描述：显示网络相关信息</span><br><span class="line">-t ： TCP协议</span><br><span class="line">-u ： UDP协议</span><br><span class="line">-l ： 监听</span><br><span class="line">-r ： 路由</span><br><span class="line">-n ： 显示IP地址和端口号</span><br><span class="line">范例：</span><br><span class="line"><span class="meta">$</span><span class="bash"> netstat -tlun 查看本机监听的端口</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> netstat -an 查看本机所有的网络连接</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> netstat -rn 查看本机路由表</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setup	#功能描述：配置网络</span><br><span class="line">范例：$ setup</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount [-t 文件系统] 设备文件名 挂载点	#挂载命令</span><br><span class="line">范例：$ mount -t iso9660 /dev/sr0 /mnt/cdrom</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-8-关机重启命令"><a href="#3-8-关机重启命令" class="headerlink" title="3.8 关机重启命令"></a>3.8 关机重启命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shutdown [选项] 时间</span><br><span class="line">选项：</span><br><span class="line">-c： 取消前一个关机命令</span><br><span class="line">-h： 关机</span><br><span class="line">-r： 重启</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">其他关机命令</span></span><br><span class="line">halt</span><br><span class="line">poweroff</span><br><span class="line">init 0	#不同状态好像是</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">其他重启命令</span></span><br><span class="line">reboot</span><br><span class="line">init 6</span><br></pre></td></tr></table></figure>
+
+<p>系统运行级别</p>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>1</td>
+<td>单用户</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不完全多用户，不含NFS服务</td>
+</tr>
+<tr>
+<td>3</td>
+<td>完全多用户</td>
+</tr>
+<tr>
+<td>4</td>
+<td>未分配</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图形界面</td>
+</tr>
+<tr>
+<td>6</td>
+<td>重启</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/inittab	#修改系统默认运行级别，id:3:initdefault</span><br><span class="line">runlevel			#查询系统运行级别</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logout	#退出登陆</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-文本编辑器"><a href="#4-文本编辑器" class="headerlink" title="4. 文本编辑器"></a>4. 文本编辑器</h3><h3 id="5-软件包管理简介"><a href="#5-软件包管理简介" class="headerlink" title="5. 软件包管理简介"></a>5. 软件包管理简介</h3><h3 id="6-用户和用户组管理"><a href="#6-用户和用户组管理" class="headerlink" title="6. 用户和用户组管理"></a>6. 用户和用户组管理</h3><h3 id="7-权限管理"><a href="#7-权限管理" class="headerlink" title="7. 权限管理"></a>7. 权限管理</h3><h3 id="8-文件管理系统"><a href="#8-文件管理系统" class="headerlink" title="8. 文件管理系统"></a>8. 文件管理系统</h3><hr>
 <h4 id="ACL权限"><a href="#ACL权限" class="headerlink" title="ACL权限"></a>ACL权限</h4><blockquote>
 <p>查看分区ACL权限是否开启</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> dumpe2fs -h /dev/sda3	<span class="comment">#dumpe2fs命令是查询指定分区详细文件系统信息的命令</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
@@ -1001,10 +1173,114 @@ classes that you can use:
 </ul>
 </li>
 </ol>
-<h3 id="10-Shell编程"><a href="#10-Shell编程" class="headerlink" title="10. Shell编程"></a>10. Shell编程</h3><p>cut字段截取命令 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cut [选项] 文件名</span><br><span class="line">-f 列号： 提取第几列</span><br><span class="line">-d 分隔符： 按照指定分隔符分割列</span><br></pre></td></tr></table></figure>
+<h3 id="10-Shell编程"><a href="#10-Shell编程" class="headerlink" title="10. Shell编程"></a>10. Shell编程</h3><hr>
+<h4 id="10-1-基础正则表达式"><a href="#10-1-基础正则表达式" class="headerlink" title="10.1 基础正则表达式"></a>10.1 基础正则表达式</h4><ul>
+<li><strong>正则表达式</strong>用来在文件中匹配符合条件的字符串，正则是<strong>包含匹配</strong>。grep、awk、sed等命令可以支持正则表达式。</li>
+<li><strong>通配符</strong>用来匹配符合条件的文件名，通配符是<strong>完全匹配</strong>。ls、find、cp这些命令不支持正则表达式，所以只能使用shell自己的通配符来进行匹配了。<code>(*,?,[])</code></li>
+</ul>
+<p>基础正则表达式</p>
+<table>
+<thead>
+<tr>
+<th align="center">元字符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>*</code></td>
+<td>前一个字符匹配0次或任意多次。</td>
+</tr>
+<tr>
+<td align="center"><code>.</code></td>
+<td>匹配除了换行符外任意一个字符。</td>
+</tr>
+<tr>
+<td align="center"><code>^</code></td>
+<td>匹配行首。例如：^hello会匹配以hello开头的行。</td>
+</tr>
+<tr>
+<td align="center"><code>$</code></td>
+<td>匹配行尾。例如：hello&amp;会匹配以hello结尾的行。</td>
+</tr>
+<tr>
+<td align="center"><code>[]</code></td>
+<td>匹配中括号中指定的任意一个字符，只匹配一个字符。例如：<code>[aoeiu]</code> 匹配任意一个元音字母，[0-9] 匹配任意一位数字， <code>[a-z][0-9]</code>匹配小写字和一位数字构成的两位字符。</td>
+</tr>
+<tr>
+<td align="center"><code>[^]</code></td>
+<td>匹配除中括号的字符以外的任意一个字符。例如：<code>[^0-9]</code> 匹配任意一位非数字字符，<code>[^a-z]</code> 表示任意一位非小写字母。</td>
+</tr>
+<tr>
+<td align="center"><code>\</code></td>
+<td>转义符。用于取消讲特殊符号的含义取消。</td>
+</tr>
+<tr>
+<td align="center"><code>\{n\}</code></td>
+<td>表示其前面的字符恰好出现n次。例如：<code>[0-9]\{4\}</code>匹配4位数字，<code>[1][3-8][0-9]\{9\}</code>匹配手机号码。</td>
+</tr>
+<tr>
+<td align="center"><code>\{n,\}</code></td>
+<td>表示其前面的字符出现不小于n次。例如：<code>[0-9]\{2,\}</code>表示两位及以上的数字。</td>
+</tr>
+<tr>
+<td align="center"><code>\{n,m\}</code></td>
+<td>表示其前面的字符至少出现n次，最多出现m次。例如：<code>[a-z]\{6,8\}</code>匹配6到8位的小写字母。</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">grep "a*" test_rule.txt	#匹配所有内容，包括空白行</span><br><span class="line">grep "aa*" test_rule.txt #匹配至少包含有一个a的行</span><br><span class="line"></span><br><span class="line">grep "s.*d" test_rule.txt	#匹配在s和d字母之间有任意字符</span><br><span class="line">grep ".*" test_rule.txt	#匹配所有内容</span><br><span class="line"></span><br><span class="line">grep -n "^$" test_rule.txt	#会匹配空白行</span><br><span class="line">grep "s[ao]id" test_rule.txt	#匹配s和i字母中，要不是a、要不是o</span><br><span class="line"></span><br><span class="line">grep "^[^a-zA-Z]" test_rule.txt	#匹配不用字母开头的行</span><br><span class="line"></span><br><span class="line">grep "sa\&#123;1,3\&#125;i" test_rule.txt	#匹配在字母s和字母i之间有最少一个a，最多三个a</span><br></pre></td></tr></table></figure>
 
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我滴set咋了？？</p>
+<p>扩展字符表达式</p>
+<p>省略</p>
+<h4 id="10-2-字符截取命令"><a href="#10-2-字符截取命令" class="headerlink" title="10.2 字符截取命令"></a>10.2 字符截取命令</h4><p>cut字段截取命令 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cut [选项] 文件名	#截取列</span><br><span class="line">-f 列号： 提取第几列		#此时分隔符是制表符</span><br><span class="line">-d 分隔符： 按照指定分隔符分割列</span><br><span class="line"></span><br><span class="line">cut -f 2,3 student.txt</span><br><span class="line">cut -d ":" -f 1,3 /etc/passwd	</span><br><span class="line"></span><br><span class="line">df -h | cut -d " " -f 1,3	#cut命令的局限</span><br><span class="line"><span class="meta">#</span><span class="bash">空格为分隔符，需要使用awk命令</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">printf ’输出类型输出格式’ 输出内容</span><br><span class="line"><span class="meta">%</span><span class="bash">ns： 输出字符串。n是数字指代输出几个字符</span></span><br><span class="line"><span class="meta">%</span><span class="bash">ni： 输出整数。n是数字指代输出几个数字</span></span><br><span class="line"><span class="meta">%</span><span class="bash">m.nf： 输出浮点数。m和n是数字，指代输出的整数位数和小数位数。如%8.2f代表共输出8位数，其中2位是小数，6位是整数。</span></span><br></pre></td></tr></table></figure>
+
+<p>输出格式</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>代表含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\a</td>
+<td>输出警告声音</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>输出退格键，也就是Backspace键</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>清除屏幕</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车，也就是Enter键</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>水平输出退格键，也就是Tab键</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>垂直输出退格键，也就是Tab键</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printf %s 1 2 3 4 5 6</span><br><span class="line">printf '%s %s %s\n' 1 2 3 4 5 6</span><br><span class="line">printf '%s\t %s\t %s\t\n' 1 2 3 4 5 6</span><br></pre></td></tr></table></figure>
+
+<p>awk命令的输出中支持print和printf命令</p>
+<ul>
+<li>print：print会在每个输出之后自动加入一个换行符（Linux默认没有print命令）</li>
+<li>printf：printf是标准格式输出命令，并不会自动加入换行符，如果需要换行，需要手工加入换行符</li>
+</ul>
+<h4 id="10-3-字符处理命令"><a href="#10-3-字符处理命令" class="headerlink" title="10.3 字符处理命令"></a>10.3 字符处理命令</h4><h4 id="10-4-条件判断"><a href="#10-4-条件判断" class="headerlink" title="10.4 条件判断"></a>10.4 条件判断</h4><h4 id="10-5-流程控制"><a href="#10-5-流程控制" class="headerlink" title="10.5 流程控制"></a>10.5 流程控制</h4><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我滴set咋了？？</p>
 
   </section>
 
