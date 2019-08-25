@@ -25,7 +25,7 @@
 <meta property="og:description" content="Linux 兄弟连1. Linux 系统简介省略  LAMP： 支撑互联网的开源技术  Linux    操作系统 Apache Web服务器 MySQL 数据库 PHP      编程语言   2. Linux 系统安装硬件设备文件名    硬 件 设备文件名    IDE硬盘 /dev/hd[a-d]   SCSI/SATA/USB硬盘 /dev/sd[a-p]   光驱 /dev/cdrom">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="d:%5CWorkspaces%5CTypora%5Cimage%5CI59.png">
-<meta property="og:updated_time" content="2019-08-17T02:39:04.409Z">
+<meta property="og:updated_time" content="2019-08-20T14:03:14.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 兄弟连 | Hexo">
 <meta name="twitter:description" content="Linux 兄弟连1. Linux 系统简介省略  LAMP： 支撑互联网的开源技术  Linux    操作系统 Apache Web服务器 MySQL 数据库 PHP      编程语言   2. Linux 系统安装硬件设备文件名    硬 件 设备文件名    IDE硬盘 /dev/hd[a-d]   SCSI/SATA/USB硬盘 /dev/sd[a-p]   光驱 /dev/cdrom">
@@ -520,7 +520,280 @@ classes that you can use:
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logout	#退出登陆</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-文本编辑器"><a href="#4-文本编辑器" class="headerlink" title="4. 文本编辑器"></a>4. 文本编辑器</h3><h3 id="5-软件包管理简介"><a href="#5-软件包管理简介" class="headerlink" title="5. 软件包管理简介"></a>5. 软件包管理简介</h3><h3 id="6-用户和用户组管理"><a href="#6-用户和用户组管理" class="headerlink" title="6. 用户和用户组管理"></a>6. 用户和用户组管理</h3><h3 id="7-权限管理"><a href="#7-权限管理" class="headerlink" title="7. 权限管理"></a>7. 权限管理</h3><h3 id="8-文件管理系统"><a href="#8-文件管理系统" class="headerlink" title="8. 文件管理系统"></a>8. 文件管理系统</h3><hr>
+<h3 id="4-文本编辑器"><a href="#4-文本编辑器" class="headerlink" title="4. 文本编辑器"></a>4. 文本编辑器</h3><h4 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h4><p>插入命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>在光标所在字符后插入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在光标所在行尾插入</td>
+</tr>
+<tr>
+<td>i</td>
+<td>在光标所在字符前插入</td>
+</tr>
+<tr>
+<td>I</td>
+<td>在光标所在行行首插入</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在光标下插入新行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在光标上插入新行</td>
+</tr>
+</tbody></table>
+<p>定位命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>: set nu</td>
+<td>设置行号</td>
+</tr>
+<tr>
+<td>: set nonu</td>
+<td>取消行号</td>
+</tr>
+<tr>
+<td>gg<br>G</td>
+<td>到第一行<br>到最后一行</td>
+</tr>
+<tr>
+<td>nG</td>
+<td>到第n行</td>
+</tr>
+<tr>
+<td>: n</td>
+<td>到第n行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>移至行尾</td>
+</tr>
+<tr>
+<td>0</td>
+<td>移至行首</td>
+</tr>
+</tbody></table>
+<p>删除命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x</td>
+<td>删除光标所在处字符</td>
+</tr>
+<tr>
+<td>nx</td>
+<td>删除光标所在处后n个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除光标所在行，ndd删除n行</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>删除光标所在行到文件末尾内容</td>
+</tr>
+<tr>
+<td>D</td>
+<td>删除光标所在处到行尾内容</td>
+</tr>
+<tr>
+<td>:n1,n2d</td>
+<td>删除指定范围的行</td>
+</tr>
+</tbody></table>
+<p>复制和剪切命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yy</td>
+<td>复制当前行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td>复制当前行以下n行</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>剪切当前行</td>
+</tr>
+<tr>
+<td>ndd</td>
+<td>剪切当前行以下n行</td>
+</tr>
+<tr>
+<td>p、P</td>
+<td>粘贴在当前光标所在行下或行上</td>
+</tr>
+</tbody></table>
+<p>替换和取消命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>取代光标所在处字符</td>
+</tr>
+<tr>
+<td>R</td>
+<td>从光标所在处开始替换字符，按Esc结束</td>
+</tr>
+<tr>
+<td>u</td>
+<td>取消上一步操作</td>
+</tr>
+</tbody></table>
+<p>搜索和搜索替换命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/string</td>
+<td>搜索指定字符串<br>搜索时忽略大小写 :set ic</td>
+</tr>
+<tr>
+<td>n</td>
+<td>搜索指定字符串的下一个出现位置</td>
+</tr>
+<tr>
+<td>:%s/old/new/g 全文</td>
+<td>全文替换指定字符串</td>
+</tr>
+<tr>
+<td>:n1,n2s/old/new/g</td>
+<td>在一定范围内替换指定字符串</td>
+</tr>
+</tbody></table>
+<p>保存和退出命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:w</td>
+<td>保存修改</td>
+</tr>
+<tr>
+<td>:w new_filename</td>
+<td>另存为指定文件</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存修改并退出</td>
+</tr>
+<tr>
+<td>ZZ</td>
+<td>快捷键，保存修改并退出</td>
+</tr>
+<tr>
+<td>:q!</td>
+<td>不保存修改退出</td>
+</tr>
+<tr>
+<td>:wq!</td>
+<td>保存修改并退出（文件所有者及root可使用）</td>
+</tr>
+</tbody></table>
+<p> Vim使用技巧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">r !命令	#导入命令执行结果 :</span><br><span class="line">:map 快捷键 触发命令	#定义快捷键 </span><br><span class="line"><span class="meta">#</span><span class="bash"> 范例：</span></span><br><span class="line"> : map ^P I#&lt;ESC&gt;</span><br><span class="line"> : map ^B 0x</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">连续行注释，:&#123;作用范围&#125;s/&#123;目标&#125;/&#123;替换&#125;/&#123;替换标志&#125;</span></span><br><span class="line"> :n1,n2s/^/#/g</span><br><span class="line"> :n1,n2s/^#//g</span><br><span class="line"> :n1,n2s/^/\/\//g</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换</span></span><br><span class="line">:ab mymail samlee@lampbrother.net</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-软件包管理简介"><a href="#5-软件包管理简介" class="headerlink" title="5. 软件包管理简介"></a>5. 软件包管理简介</h3><h4 id="5-1-软件包管理简介"><a href="#5-1-软件包管理简介" class="headerlink" title="5.1 软件包管理简介"></a>5.1 软件包管理简介</h4><ul>
+<li>源码包<ul>
+<li>脚本安装包</li>
+</ul>
+</li>
+<li>二进制包（RPM包、系统默认包）</li>
+</ul>
+<h4 id="5-2-RPM包管理-rpm命令管理"><a href="#5-2-RPM包管理-rpm命令管理" class="headerlink" title="5.2 RPM包管理-rpm命令管理"></a>5.2 RPM包管理-rpm命令管理</h4><p>RPM包命名原则</p>
+<p>httpd-2.2.15-15.el6.centos.1.i686.rpm<br>httpd———–软件包名<br>2.2.15———软件版本<br>15————–软件发布的次数<br>el6.centos—-适合的Linux平台<br>i686————适合的硬件平台<br>rpm————-rpm包扩展名</p>
+<p>RPM包依赖性</p>
+<ul>
+<li>树形依赖： a-&gt;b-&gt;c</li>
+<li>环形依赖： a-&gt;b-&gt;c-&gt;a</li>
+<li>模块依赖： 模块依赖查询网站：<a href="http://www.rpmfind.net" target="_blank" rel="noopener">www.rpmfind.net</a></li>
+</ul>
+<p>包全名：操作的包是没有安装的软件包时，使用包全名。而且要注意路径<br>包名：操作已经安装的软件包时，使用包名。是搜索/var/lib/rpm/中的数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rpm –ivh 包全名	#RPM安装</span><br><span class="line">选项：</span><br><span class="line">-i（install） 安装</span><br><span class="line">-v（verbose） 显示详细信息</span><br><span class="line">-h（hash） 显示进度</span><br><span class="line">--nodeps 不检测依赖性</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh 包全名	#RPM包升级</span><br><span class="line">选项：</span><br><span class="line">-U（upgrade） 升级</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -e 包名		#卸载</span><br><span class="line">选项：</span><br><span class="line">-e（erase） 卸载</span><br><span class="line">--nodeps 不检查依赖性</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> rpm -q 包名		#查询包是否安装</span><br><span class="line">选项：</span><br><span class="line">-q 查询（query）</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> rpm –qa		<span class="comment">#查询所有已经安装的RPM包</span></span></span><br><span class="line">选项：</span><br><span class="line">-a 所有（all）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm –qi 包名		#查询软件包详细信息</span><br><span class="line">选项：</span><br><span class="line">-i 查询软件信息（information）</span><br><span class="line">-p 查询未安装包信息（package）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm –ql 包名		#查询包中文件安装位置</span><br><span class="line">选项：</span><br><span class="line">-l 列表（list）</span><br><span class="line">-p 查询未安装包信息（package）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm –qf 系统文件名	#查询系统文件属于哪个RPM包</span><br><span class="line">选项：</span><br><span class="line">-f 查询系统文件属于哪个软件包（file）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm –qR 包名		#查询软件包的依赖性</span><br><span class="line">选项：</span><br><span class="line">-R 查询软件包的依赖性（requires）</span><br><span class="line">-p 查询未安装包信息（package）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> rpm –V 已安装的包名</span><br><span class="line">选项：</span><br><span class="line">-V 校验指定RPM包中的文件（verify）</span><br></pre></td></tr></table></figure>
+
+<p>验证内容中的8个信息的具体内容如下：</p>
+<ul>
+<li>S 文件大小是否改变</li>
+<li>M 文件的类型或文件的权限（rwx）是否被改变</li>
+<li>5 文件MD5校验和是否改变（可以看成文件内容是否改变）</li>
+<li>D 设备的中，从代码是否改变</li>
+<li>L 文件路径是否改变</li>
+<li>U 文件的属主（所有者）是否改变</li>
+<li>G 文件的属组是否改变</li>
+<li>T 文件的修改时间是否改变</li>
+</ul>
+<p>文件类型</p>
+<ul>
+<li>c 配置文件（config file）</li>
+<li>d 普通文档（documentation）</li>
+<li>g “<strong>鬼”文件</strong>（ghost file），很少见，就是该文件不应该被这个RPM包包含</li>
+<li>l 授权文件（license file）</li>
+<li>r 描述文件（read me）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.rpm2cpio 包全名 | cpio -idv .文件绝对路径</span><br><span class="line">rpm2cpio</span><br><span class="line"><span class="meta">#</span><span class="bash">将rpm包转换为cpio格式的命令</span></span><br><span class="line">cpio</span><br><span class="line"><span class="meta">#</span><span class="bash">是一个标准工具，它用于创建软件档案文件和从档案文件中提取文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cpio 选项 &lt; [文件|设备]</span><br><span class="line">选项：</span><br><span class="line">-i：copy-in模式，还原</span><br><span class="line">-d：还原时自动新建目录</span><br><span class="line">-v：显示还原过程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -qf /bin/ls		#查询ls命令属于哪个软件包</span><br><span class="line">mv /bin/ls /tmp/	#造成ls命令误删除假象</span><br><span class="line">rpm2cpio /mnt/cdrom/Packages/coreutils8.4-19.el6.i686.rpm | cpio -idv ./bin/ls</span><br><span class="line"><span class="meta">#</span><span class="bash">提取RPM包中ls命令到当前目录的/bin/ls下</span></span><br><span class="line">[root@localhost ~]# cp /root/bin/ls /bin/	#把ls命令复制会/bin/目录，修复文件丢失</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-3RPM包管理-yum在线管理"><a href="#5-3RPM包管理-yum在线管理" class="headerlink" title="5.3RPM包管理-yum在线管理"></a>5.3RPM包管理-yum在线管理</h4><h4 id="5-4-源码包管理"><a href="#5-4-源码包管理" class="headerlink" title="5.4 源码包管理"></a>5.4 源码包管理</h4><h4 id="5-5脚本安装包与软件包选择"><a href="#5-5脚本安装包与软件包选择" class="headerlink" title="5.5脚本安装包与软件包选择"></a>5.5脚本安装包与软件包选择</h4><h3 id="6-用户和用户组管理"><a href="#6-用户和用户组管理" class="headerlink" title="6. 用户和用户组管理"></a>6. 用户和用户组管理</h3><h3 id="7-权限管理"><a href="#7-权限管理" class="headerlink" title="7. 权限管理"></a>7. 权限管理</h3><h3 id="8-文件管理系统"><a href="#8-文件管理系统" class="headerlink" title="8. 文件管理系统"></a>8. 文件管理系统</h3><hr>
 <h4 id="ACL权限"><a href="#ACL权限" class="headerlink" title="ACL权限"></a>ACL权限</h4><blockquote>
 <p>查看分区ACL权限是否开启</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> dumpe2fs -h /dev/sda3	<span class="comment">#dumpe2fs命令是查询指定分区详细文件系统信息的命令</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
@@ -1280,7 +1553,636 @@ classes that you can use:
 <li>print：print会在每个输出之后自动加入一个换行符（Linux默认没有print命令）</li>
 <li>printf：printf是标准格式输出命令，并不会自动加入换行符，如果需要换行，需要手工加入换行符</li>
 </ul>
-<h4 id="10-3-字符处理命令"><a href="#10-3-字符处理命令" class="headerlink" title="10.3 字符处理命令"></a>10.3 字符处理命令</h4><h4 id="10-4-条件判断"><a href="#10-4-条件判断" class="headerlink" title="10.4 条件判断"></a>10.4 条件判断</h4><h4 id="10-5-流程控制"><a href="#10-5-流程控制" class="headerlink" title="10.5 流程控制"></a>10.5 流程控制</h4><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我滴set咋了？？</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> awk ‘条件1&#123;动作1&#125; 条件2&#123;动作2&#125;…’ 文件名</span></span><br><span class="line"><span class="meta">#</span><span class="bash">条件（Pattern）：</span></span><br><span class="line"><span class="meta">#</span><span class="bash">一般使用关系表达式作为条件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">x &gt; 10 判断变量 x是否大于10</span></span><br><span class="line"><span class="meta">#</span><span class="bash">x&gt;=10 大于等于</span></span><br><span class="line"><span class="meta">#</span><span class="bash">x&lt;=10 小于等于</span></span><br><span class="line"><span class="meta">#</span><span class="bash">动作（Action）：</span></span><br><span class="line"><span class="meta">#</span><span class="bash">格式化输出</span></span><br><span class="line"><span class="meta">#</span><span class="bash">流程控制语句</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> awk <span class="string">'&#123;printf $2 "\t" $6 "\n"&#125;'</span> student.txt 	<span class="comment">#输入出第二列和第六列</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> df -h | awk <span class="string">'&#123;print $1 "\t" $3&#125;'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 先输出 This is a transcript，在执行后面的内容。</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> awk <span class="string">'BEGIN&#123;printf "This is a transcript \n" &#125; &#123;printf $2 "\t" $6 "\n"&#125;'</span> student.txt </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> awk <span class="string">'END&#123;printf "The End \n" &#125; &#123;printf $2 "\t" $6 "\n"&#125;'</span> student.txt</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">手工定义分隔符一定要加BEGIN，否则第一行来不及处理便输出</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat /etc/passwd | grep <span class="string">"/bin/bash"</span> | awk <span class="string">'BEGIN &#123;FS=":"&#125; &#123;printf $1 "\t" $3 "\n"&#125;'</span> </span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat student.txt | grep -v Name | awk <span class="string">'$6 &gt;= 87 &#123;printf $2 "\n" &#125;'</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">sed 是一种几乎包括在所有 UNIX 平台（包括 Linux）的轻量级流编辑器。sed主要是用来将数据进行选取、替换、删除、新增的命令。</span></span><br><span class="line"></span><br><span class="line">sed [选项] ‘[动作]’ 文件名</span><br><span class="line">选项：</span><br><span class="line">-n： 一般sed命令会把所有数据都输出到屏幕 ，如果加入此选择，则只会把经过sed命令处理的行输出到屏幕。</span><br><span class="line">-e： 允许对输入数据应用多条sed命令编辑</span><br><span class="line">-i： 用sed的修改结果直接修改读取数据的文件，而不是由屏幕输出</span><br></pre></td></tr></table></figure>
+
+<p>动作</p>
+<table>
+<thead>
+<tr>
+<th>字符串</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>a \：</code></td>
+<td>追加，在当前行后添加一行或多行。添加多行时，除最后 一行外，每行末尾需要用“\”代表数据未完结。</td>
+</tr>
+<tr>
+<td><code>c \：</code></td>
+<td>行替换，用c后面的字符串替换原数据行，替换多行时，除最后一行外，每行末尾需用“\”代表数据未完结。</td>
+</tr>
+<tr>
+<td><code>i \：</code></td>
+<td>插入，在当期行前插入一行或多行。插入多行时，除最后 一行外，每行末尾需要用“\”代表数据未完结。</td>
+</tr>
+<tr>
+<td><code>d：</code></td>
+<td>删除，删除指定的行。</td>
+</tr>
+<tr>
+<td><code>p：</code></td>
+<td>打印，输出指定的行。</td>
+</tr>
+<tr>
+<td><code>s：</code></td>
+<td>字串替换，用一个字符串替换另外一个字符串。格式为“行范围s/旧字串/新字串/g”（和vim中的替换格式类似）。</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> df | sed <span class="string">'3p'</span>		<span class="comment">#输出第三行的同时将所有数据也输出了一遍</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> df | sed -n <span class="string">'3p'</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">不修改文件本身,只是改变数据的输出</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed <span class="string">'2,4d'</span> student.txt	<span class="comment">#删除第二行到第四行的数据</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed <span class="string">'2a hello'</span> student.txt	<span class="comment">#在第二行后追加hello</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed <span class="string">'2i hello world'</span> student.txt	<span class="comment">#在第二行前插入两行数据</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed <span class="string">'2c No such person'</span> student.txt	<span class="comment">#数据替换，将第二行替换为No such person</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed <span class="string">'3s/74/99/g'</span> student.txt	<span class="comment">#在第三行中，把74换成99</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed -i <span class="string">'3s/74/99/g'</span> student.txt	<span class="comment">#-i,sed操作的数据直接写入文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed -e <span class="string">'s/Liming//g ; s/Gao//g'</span> student.txt	<span class="comment">#同时把“Liming”和“Gao”替换为空,s不加行号代表整篇文档，</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-3-字符处理命令"><a href="#10-3-字符处理命令" class="headerlink" title="10.3 字符处理命令"></a>10.3 字符处理命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sort [选项] 文件名	#排序命令</span><br><span class="line">选项：</span><br><span class="line">-f： 忽略大小写</span><br><span class="line">-n： 以数值型进行排序，默认使用字符串型排序</span><br><span class="line">-r： 反向排序</span><br><span class="line">-t： 指定分隔符，默认是分隔符是制表符</span><br><span class="line">-k n[,m]： 按照指定的字段范围排序。从第n字段开始，m字段结束（默认到行尾）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sort /etc/passwd	#排序用户信息文件</span><br><span class="line">sort -r /etc/passwd	#反向排序</span><br><span class="line"><span class="meta">$</span><span class="bash"> sort -t <span class="string">":"</span> -k 3,3 /etc/passwd	<span class="comment">#指定分隔符是“：”，用第三字段开头，第三字段结尾排</span></span></span><br><span class="line">序，就是只用第三字段排序</span><br><span class="line"><span class="meta">$</span><span class="bash"> sort -n -t <span class="string">":"</span> -k 3,3 /etc/passwd</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> wc [选项] 文件名	#统计命令</span><br><span class="line">选项：</span><br><span class="line">-l： 只统计行数</span><br><span class="line">-w： 只统计单词数</span><br><span class="line">-m： 只统计字符数</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-4-条件判断"><a href="#10-4-条件判断" class="headerlink" title="10.4 条件判断"></a>10.4 条件判断</h4><p>按照文件类型进行判断</p>
+<table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b 文件</td>
+<td>判断该文件是否存在，并且是否为块设备文件（是块设备文件为真）</td>
+</tr>
+<tr>
+<td>-c文件</td>
+<td>判断该文件是否存在，并且是否为字符设备文件（是字符设备文件为真）</td>
+</tr>
+<tr>
+<td>-d 文件</td>
+<td>判断该文件是否存在，并且是否为目录文件（是目录为真）</td>
+</tr>
+<tr>
+<td>-e 文件</td>
+<td>判断该文件是否存在（存在为真）</td>
+</tr>
+<tr>
+<td>-f 文件</td>
+<td>判断该文件是否存在，并且是否为普通文件（是普通文件为真）</td>
+</tr>
+<tr>
+<td>-L 文件</td>
+<td>判断该文件是否存在，并且是否为符号链接文件（是符号链接文件为真）</td>
+</tr>
+<tr>
+<td>-p 文件</td>
+<td>判断该文件是否存在，并且是否为管道文件（是管道文件为真）</td>
+</tr>
+<tr>
+<td>-s 文件</td>
+<td>判断该文件是否存在，并且是否为非空（非空为真）</td>
+</tr>
+<tr>
+<td>-S 文件</td>
+<td>判断该文件是否存在，并且是否为套接字文件（是套接字文件为真）</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">test</span> -e /root/install.log	<span class="comment">#通过 echo$? 查看上一条命令的执行结果</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -e /root/install.log ]	<span class="comment">#注意空格</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -d /root ] &amp;&amp; <span class="built_in">echo</span> <span class="string">"yes"</span> || <span class="built_in">echo</span> <span class="string">"no"</span>	<span class="comment">#第一个判断命令如果正确执行，则打印“yes”，否则打印“no”</span></span></span><br></pre></td></tr></table></figure>
+
+<p>按照文件权限进行判断</p>
+<table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有读权限（有读权限为真）</td>
+</tr>
+<tr>
+<td>-w 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有写权限（有写权限为真）</td>
+</tr>
+<tr>
+<td>-x 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有执行权限（有执行权限为真）</td>
+</tr>
+<tr>
+<td>-u 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有SUID权限（有SUID权限为真）</td>
+</tr>
+<tr>
+<td>-g 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有SGID权限（有SGID权限为真）</td>
+</tr>
+<tr>
+<td>-k 文件</td>
+<td>判断该文件是否存在，并且是否该文件拥有SBit权限（有SBit权限为真）</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> [ -w student.txt ] &amp;&amp; <span class="built_in">echo</span> <span class="string">"yes"</span> || <span class="built_in">echo</span> <span class="string">"no"</span>	<span class="comment">#判断文件是拥有写权限的,不区分身份</span></span></span><br></pre></td></tr></table></figure>
+
+<p>两个文件之间进行比较</p>
+<table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文件1 -nt 文件2</td>
+<td>判断文件1的修改时间是否比文件2的新（如果新则为真）</td>
+</tr>
+<tr>
+<td>文件1 -ot 文件2</td>
+<td>判断文件1的修改时间是否比文件2的旧（如果旧则为真）</td>
+</tr>
+<tr>
+<td>文件1 -ef 文件2</td>
+<td>判断文件1是否和文件2的Inode号一致，可以理解为两个文件是否为同一个文件。这个判断用于判断硬链接是很好的方法</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln /root/student.txt /tmp/stu.txt	#创建个硬链接吧</span><br><span class="line"><span class="meta">#</span><span class="bash">用<span class="built_in">test</span>测试下，果然很有用</span></span><br><span class="line">[ /root/student.txt -ef /tmp/stu.txt ] &amp;&amp; echo "yes" || echo "no" yes</span><br></pre></td></tr></table></figure>
+
+<p>两个整数之间比较</p>
+<table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>整数1 -eq 整数2</td>
+<td>判断整数1是否和整数2相等（相等为真）</td>
+</tr>
+<tr>
+<td>整数1 -ne 整数2</td>
+<td>判断整数1是否和整数2不相等（不相等位置）</td>
+</tr>
+<tr>
+<td>整数1 -gt 整数2</td>
+<td>判断整数1是否大于整数2（大于为真）</td>
+</tr>
+<tr>
+<td>整数1 -lt 整数2</td>
+<td>判断整数1是否小于整数2（小于位置）</td>
+</tr>
+<tr>
+<td>整数1 -ge 整数2</td>
+<td>判断整数1是否大于等于整数2（大于等于为真）</td>
+</tr>
+<tr>
+<td>整数1 -le 整数2</td>
+<td>判断整数1是否小于等于整数2（小于等于为真）</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ 23 -ge 22 ] &amp;&amp; echo "yes" || echo "no"	#判断23是否大于等于22，当然是了</span><br><span class="line">[ 23 -le 22 ] &amp;&amp; echo "yes" || echo "no"	#判断23是否小于等于22，当然不是了</span><br></pre></td></tr></table></figure>
+
+<p>字符串的判断</p>
+<table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-z 字符串</td>
+<td>判断字符串是否为空（为空返回真）</td>
+</tr>
+<tr>
+<td>-n 字符串</td>
+<td>判断字符串是否为非空（非空返回真）</td>
+</tr>
+<tr>
+<td>字串1 ==字串2</td>
+<td>判断字符串1是否和字符串2相等（相等返回真）</td>
+</tr>
+<tr>
+<td>字串1 != 字串2</td>
+<td>判断字符串1是否和字符串2不相等（不相等返回真）</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name=sc		#给name变量赋值</span><br><span class="line">[ -z "$name" ] &amp;&amp; echo "yes" || echo "no"</span><br><span class="line"><span class="meta">#</span><span class="bash">判断name变量是否为空，因为不为空，所以返回no</span></span><br><span class="line"></span><br><span class="line">aa=11</span><br><span class="line">bb=22	#给变量aa和变量bb赋值</span><br><span class="line"><span class="meta">#</span><span class="bash">判断两个变量的值是否相等，明显不相等，所以返回no,注意空格</span></span><br><span class="line">[ "$aa" == "bb" ] &amp;&amp; echo "yes" || echo "no"</span><br></pre></td></tr></table></figure>
+
+<p>多重条件判断</p>
+<table>
+<thead>
+<tr>
+<th>测试选项</th>
+<th>作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>判断1 -a 判断2</td>
+<td>逻辑与，判断1和判断2都成立，最终的结果才为真</td>
+</tr>
+<tr>
+<td>判断1 -o 判断2</td>
+<td>逻辑或，判断1和判断2有一个成立，最终的结果就为<br>真</td>
+</tr>
+<tr>
+<td>！判断</td>
+<td>逻辑非，使原始的判断式取反</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> aa=11</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -n <span class="string">"<span class="variable">$aa</span>"</span> -a <span class="string">"<span class="variable">$aa</span>"</span> -gt 23 ] &amp;&amp; <span class="built_in">echo</span> <span class="string">"yes"</span> || <span class="built_in">echo</span> <span class="string">"no"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">判断变量aa是否有值，同时判断变量aa的是否大于23</span></span><br><span class="line"><span class="meta">#</span><span class="bash">因为变量aa的值不大于23，所以虽然第一个判断值为真，返回的结果也是假</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> aa=24</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -n <span class="string">"<span class="variable">$aa</span>"</span> -a <span class="string">"<span class="variable">$aa</span>"</span> -gt 23 ] &amp;&amp; <span class="built_in">echo</span> <span class="string">"yes"</span> || <span class="built_in">echo</span> <span class="string">"no"</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-5-流程控制"><a href="#10-5-流程控制" class="headerlink" title="10.5 流程控制"></a>10.5 流程控制</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">if [ 条件判断式 ];then</span><br><span class="line">	程序</span><br><span class="line">fi</span><br><span class="line">或者</span><br><span class="line">if [ 条件判断式 ]</span><br><span class="line">	then</span><br><span class="line">		程序</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ 条件判断式 ]</span><br><span class="line">	then</span><br><span class="line">		条件成立时，执行的程序</span><br><span class="line">	else</span><br><span class="line">		条件不成立时，执行的另一个程序</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ 条件判断式1 ]</span><br><span class="line">	then</span><br><span class="line">		当条件判断式1成立时，执行程序1</span><br><span class="line">elif [ 条件判断式2 ]</span><br><span class="line">	then</span><br><span class="line">		当条件判断式2成立时，执行程序2</span><br><span class="line">···省略更多条件…</span><br><span class="line">else</span><br><span class="line">	当所有条件都不成立时，最后执行此程序</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>if语句使用fi结尾，和一般语言使用大括号结尾不同</li>
+<li>[ 条件判断式 ]就是使用test命令判断，所以中括号和条件判断式之间必须有空格</li>
+<li>then后面跟符合条件之后执行的程序，可以放在[]之后，用“；”分割。也可以换行写入，就不需要“；”了</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">统计根分区使用率</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Author: shenchao （E-mail: shenchao@lampbrother.net）</span></span><br><span class="line">rate=$(df -h | grep "/dev/sda3" | awk '&#123;print $5&#125;' | cut -d "%" -f1)</span><br><span class="line"><span class="meta">#</span><span class="bash">把根分区使用率作为变量值赋予变量rate</span></span><br><span class="line"></span><br><span class="line">if [ $rate -ge 80 ]</span><br><span class="line"> then</span><br><span class="line">  echo "Warning! /dev/sda3 is full!!"</span><br><span class="line"> fi</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">case $变量名 in</span><br><span class="line">	"值1"）</span><br><span class="line">		如果变量的值等于值1，则执行程序1</span><br><span class="line">		;;</span><br><span class="line">	"值2"）</span><br><span class="line">		如果变量的值等于值2，则执行程序2</span><br><span class="line">		;;</span><br><span class="line">	…省略其他分支…</span><br><span class="line">	*）</span><br><span class="line">	如果变量的值都不是以上的值，则执行此程序</span><br><span class="line">		;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for 变量 in 值1 值2 值3		#可以用变量来替代</span><br><span class="line">	do</span><br><span class="line">		程序</span><br><span class="line">	done</span><br><span class="line">	</span><br><span class="line">for ((初始值；循环控制条件；变量变化))</span><br><span class="line">	do</span><br><span class="line">		程序</span><br><span class="line">	done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">从1加到100</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Author：abcd</span></span><br><span class="line"></span><br><span class="line">s=0</span><br><span class="line">for ((i=1;i&lt;=100;i=i+1))</span><br><span class="line">	do</span><br><span class="line">		s=$(($s+$i))</span><br><span class="line">	done</span><br><span class="line">echo "The sum of 1+2+3+...+100 is:$s"</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while [ 条件判断式 ]</span><br><span class="line">do</span><br><span class="line">程序</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until [ 条件判断式 ]</span><br><span class="line">do</span><br><span class="line">程序</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">从1加到100</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Author: shenchao （E-mail: shenchao@lampbrother.net）</span></span><br><span class="line">i=1</span><br><span class="line">s=0</span><br><span class="line">while [ $i -le 100 ]</span><br><span class="line"><span class="meta">#</span><span class="bash">如果变量i的值小于等于100，则执行循环</span></span><br><span class="line">	do</span><br><span class="line"> 		s=$(( $s+$i ))</span><br><span class="line">		i=$(( $i+1 ))</span><br><span class="line">	done</span><br><span class="line">echo "The sum is: $s"</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Linux服务管理"><a href="#11-Linux服务管理" class="headerlink" title="11. Linux服务管理"></a>11. Linux服务管理</h3><h4 id="11-1-RPM包默认安装的服务"><a href="#11-1-RPM包默认安装的服务" class="headerlink" title="11.1 RPM包默认安装的服务"></a>11.1 RPM包默认安装的服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chkconfig --list	<span class="comment">#查看服务自启动状态，可以看到所有RPM包安装的服务，并不一定在当前运行</span></span></span><br><span class="line">ps aux	#查看系统中所有运行进程</span><br><span class="line">netstat	-tlun</span><br></pre></td></tr></table></figure>
+
+<p>RPM安装服务和源码包安装服务的区别就是安装位置的不同</p>
+<ul>
+<li>源码包安装在指定位置，一般是/usr/local/</li>
+<li>RPM包安装在默认位置中</li>
+</ul>
+<ul>
+<li>/etc/init.d/：启动脚本位置</li>
+<li>/etc/sysconfig/：初始化环境配置文件位置</li>
+<li>/etc/：配置文件位置</li>
+<li>/etc/xinetd.conf：xinetd配置文件</li>
+<li>/etc/xinetd.d/：基于xinetd服务的启动脚本</li>
+<li>/var/lib/：服务产生的数据放在这里/var/log/：日志</li>
+</ul>
+<p>独立的服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">独立服务的启动，service命令是红帽的专有命令</span></span><br><span class="line">/etc/init.d/独立服务名 start|stop|status|restart|</span><br><span class="line">service 独立服务名 start|stop|restart||status</span><br><span class="line"><span class="meta">#</span><span class="bash">列出系统所有RPM安装的服务的状态</span></span><br><span class="line">service --status-all</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">独立服务的自启动</span></span><br><span class="line">chkconfig [--level 运行级别] [独立服务名] [on|off]</span><br><span class="line"><span class="meta">#</span><span class="bash">或修改/etc/rc.d/rc.local文件，里面的命令会在登录之前执行，推荐使用。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">或使用ntsysv命令管理自启动，红帽专有命令</span></span><br></pre></td></tr></table></figure>
+
+<p>基于xinetd服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">安装xinetd与telnet</span></span><br><span class="line">yum -y install xinetd</span><br><span class="line">yum -y install telnet-server	#不安全，试验后删掉</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">xinetd服务的启动</span></span><br><span class="line">vi /etc/xinetd.d/telnet</span><br><span class="line">重启xinetd服务</span><br><span class="line">service xinetd restart</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">xinetd服务的自启动，xinetd的自启动和启动是相通的</span></span><br><span class="line">chkconfig telnet on</span><br><span class="line">ntsysv</span><br></pre></td></tr></table></figure>
+
+<h4 id="11-2-源码包安装的服务"><a href="#11-2-源码包安装的服务" class="headerlink" title="11.2 源码包安装的服务"></a>11.2 源码包安装的服务</h4><p>查看服务安装位置，一般是/usr/local/下，不能用命令查看</p>
+<p>使用绝对路径，调用启动脚本来启动。不同的源码包的启动脚本不同。可以查看源码包的安装说明，查看启动脚#本的方法。</p>
+<p>/usr/local/apache2/bin/apachectl start|stop</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">源码包服务的自启动</span></span><br><span class="line">vi /etc/rc.d/rc.local</span><br><span class="line"><span class="meta">#</span><span class="bash">加入</span></span><br><span class="line">/usr/local/apache2/bin/apachectl start</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">让源码包服务被服务管理命令识别</span></span><br><span class="line">ln -s /usr/local/apache2/bin/apachectl /etc/init.d/apache</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">让源码包的apache服务能被chkconfig与ntsysv命令管理自启动</span></span><br><span class="line"></span><br><span class="line">vi /etc/init.d/apache</span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 35 86 76</span></span><br><span class="line"><span class="meta">#</span><span class="bash">指定httpd脚本可以被chkconfig命令管理。格式是：</span></span><br><span class="line">chkconfig： 运行级别 启动顺序 关闭顺序</span><br><span class="line"><span class="meta">#</span><span class="bash"> description: <span class="built_in">source</span> package apache</span></span><br><span class="line"><span class="meta">#</span><span class="bash">说明，内容随意</span></span><br><span class="line"></span><br><span class="line">chkconfig --add apache</span><br><span class="line"><span class="meta">#</span><span class="bash">把源码包apache加入chkconfig命令</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="12-Linux系统管理"><a href="#12-Linux系统管理" class="headerlink" title="12. Linux系统管理"></a>12. Linux系统管理</h3><h4 id="12-1-进程管理"><a href="#12-1-进程管理" class="headerlink" title="12.1 进程管理"></a>12.1 进程管理</h4><p>进程管理作用</p>
+<ul>
+<li>判断服务器健康状态</li>
+<li>查看系统中所有进程</li>
+<li>杀死进程</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">查看系统中所有进程</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux	<span class="comment">#查看系统中所有进程，使用BSD操作系统格式，UNIX</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps -le	<span class="comment">#查看系统中所有进程，使用Linux标准命令格式</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>USER：该进程是由哪个用户产生的；</li>
+<li>PID：进程的ID号；</li>
+<li>%CPU：该进程占用CPU资源的百分比，占用越高，进程越耗费资源；</li>
+<li>%MEM：该进程占用物理内存的百分比，占用越高，进程越耗费资源；</li>
+<li>VSZ：该进程占用虚拟内存的大小，单位KB；</li>
+<li>RSS：该进程占用实际物理内存的大小，单位KB；</li>
+<li><strong>TTY</strong>：该进程是在哪个终端中运行的。其中<strong>tty1-tty7</strong>代表本地控制台终端，t<strong>ty1-tty6</strong>是本地的<strong>字符界面终端</strong>，<strong>tty7</strong>是<strong>图形终端</strong>。<strong>pts/0-255代表虚拟终端</strong>。？表示由内核直接产生。</li>
+<li>STAT：进程状态。常见的状态有：R：运行、S：睡眠、T：停止状态、s：包含子进程、+：位于后台</li>
+<li>START：该进程的启动时间</li>
+<li>TIME：该进程占用CPU的运算时间，注意不是系统时间</li>
+<li>COMMAND：产生此进程的命令名</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">top [选项]	</span><br><span class="line">选项：</span><br><span class="line">-d 秒数： 指定top命令每隔几秒更新。默认是3秒，省略好像也一样</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">在top命令的交互模式当中可以执行的命令：</span></span><br><span class="line">？或h： 显示交互模式的帮助</span><br><span class="line">P： 以CPU使用率排序，默认就是此项</span><br><span class="line">M： 以内存的使用率排序</span><br><span class="line">N： 以PID排序</span><br><span class="line">q： 退出top</span><br></pre></td></tr></table></figure>
+
+<p>第一行信息为任务队列信息</p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>12:26:46</td>
+<td>系统当前时间</td>
+</tr>
+<tr>
+<td>up 1 day, 13:32</td>
+<td>系统的运行时间，本机已经运行1天13小时32分钟</td>
+</tr>
+<tr>
+<td>2 users</td>
+<td>当前登录了两个用户</td>
+</tr>
+<tr>
+<td>load average: 0.00, 0.00, 0.00</td>
+<td>系统在之前1分钟，5分钟，15分钟的平均负载。一般认为小于1时，负载较小。如果大于1，系统已经超出负荷。如果是八核需要超过8</td>
+</tr>
+</tbody></table>
+<p>第二行为进程信息</p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tasks: 95 total</td>
+<td>系统中的进程总数</td>
+</tr>
+<tr>
+<td>1 running</td>
+<td>正在运行的进程数</td>
+</tr>
+<tr>
+<td>94 sleeping</td>
+<td>睡眠的进程</td>
+</tr>
+<tr>
+<td>0 stopped</td>
+<td>正在停止的进程</td>
+</tr>
+<tr>
+<td>0 zombie</td>
+<td>僵尸进程。如果不是0，需要手工检查僵尸进程</td>
+</tr>
+</tbody></table>
+<p>第三行为CPU信息</p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cpu(s): 0.1%us</td>
+<td>用户模式占用的CPU百分比</td>
+</tr>
+<tr>
+<td>0.1%sy</td>
+<td>系统模式占用的CPU百分比</td>
+</tr>
+<tr>
+<td>0.0%ni</td>
+<td>改变过优先级的用户进程占用的CPU百分比改变过优先级的用户进程占用的CPU百分比</td>
+</tr>
+<tr>
+<td>99.7%id</td>
+<td>空闲CPU的CPU百分比</td>
+</tr>
+<tr>
+<td>0.1%wa</td>
+<td>等待输入/输出的进程的占用CPU百分比</td>
+</tr>
+<tr>
+<td>0.0%hi</td>
+<td>硬中断请求服务占用的CPU百分比</td>
+</tr>
+<tr>
+<td>0.1%si</td>
+<td>软中断请求服务占用的CPU百分比</td>
+</tr>
+<tr>
+<td>0.0%st</td>
+<td>st（Steal time）虚拟时间百分比。就是当有虚拟机时，虚拟CPU等待实际CPU的时间百分比。</td>
+</tr>
+</tbody></table>
+<p>第四行为物理内存信息</p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mem: 625344k total</td>
+<td>物理内存的总量，单位KB</td>
+</tr>
+<tr>
+<td>571504k used</td>
+<td>已经使用的物理内存数量</td>
+</tr>
+<tr>
+<td>53840k free</td>
+<td>空闲的物理内存数量，我们使用的是虚拟机，总共只分配了628MB内存，所以&gt;只有53MB的空闲内存了</td>
+</tr>
+<tr>
+<td>65800k buffers</td>
+<td>作为缓冲的内存数量</td>
+</tr>
+</tbody></table>
+<p>第五行为交换分区（swap）信息!</p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Swap: 524280k total</td>
+<td>交换分区（虚拟内存）的总大小</td>
+</tr>
+<tr>
+<td>0k used</td>
+<td>已经使用的交互分区的大小</td>
+</tr>
+<tr>
+<td>524280k free</td>
+<td>空闲交换分区的大小</td>
+</tr>
+<tr>
+<td>409280k cached</td>
+<td>作为缓存的交互分区的大小</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pstree [选项]</span><br><span class="line">选项：</span><br><span class="line">-p： 显示进程的PID</span><br><span class="line">-u： 显示进程的所属用户</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> –l	<span class="comment">#查看可用的进程信号</span></span></span><br></pre></td></tr></table></figure>
+
+<p>常用进程信号</p>
+<table>
+<thead>
+<tr>
+<th>代号</th>
+<th>信号名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>SIGHUP</td>
+<td>该信号让进程立即关闭，然后重新读取配置文件之后<strong>重启</strong>。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SIGINT</td>
+<td>程序终止信号，用于终止前台进程。相当于输出ctrl+c快捷键。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>SIGFPE</td>
+<td>在发生致命的算术运算错误时发出. 不仅包括浮点运算错误,还包括溢出及除数为0等其它所有的算术的错误。</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SIGKILL</td>
+<td>用来立即结束程序的运行. 本信号不能被阻塞、处理和忽略。一般用于<strong>强制终止进程</strong>。</td>
+</tr>
+<tr>
+<td>14</td>
+<td>SIGALRM</td>
+<td>时钟定时信号, 计算的是实际的时间或时钟时间. alarm函数使用该信号。</td>
+</tr>
+<tr>
+<td>15</td>
+<td>SIGTERM</td>
+<td><strong>正常结束进程</strong>的信号，kill命令的默认信号。有时如果进程已经发生问题，这个信号是无法正常终止进程的，我们才会尝试SIGKILL信号，也就是信号9。</td>
+</tr>
+<tr>
+<td>18</td>
+<td>SIGCONT</td>
+<td>该信号可以让暂停的进程恢复执行，本信号不能被阻断。</td>
+</tr>
+<tr>
+<td>19</td>
+<td>SIGSTOP</td>
+<td>该信号可以暂停前台进程，相当于输入ctrl+z快捷键。本信号不能被阻断。</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -1 22354	<span class="comment">#重启进程，后跟的是PID号</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -9 22368	<span class="comment">#强制杀死进程</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">killall [选项][信号] 进程名	#按照进程名杀死进程，整个进程</span><br><span class="line">选项：</span><br><span class="line">-i： 交互式，询问是否要杀死某个进程</span><br><span class="line">-I： 忽略进程名的大小写</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pkill [选项] [信号] 进程名</span><br><span class="line"><span class="meta">#</span><span class="bash">按照进程名终止进程</span></span><br><span class="line">选项：</span><br><span class="line">-t 终端号： 按照终端号踢出用户</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">w	<span class="comment">#使用w命令查询本机已经登录的用户</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pkill -t -9 pts/1	<span class="comment">#强制杀死从pts/1虚拟终端登录的进程</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="12-2-工作管理"><a href="#12-2-工作管理" class="headerlink" title="12.2 工作管理"></a>12.2 工作管理</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">把进程放入后台</span></span><br><span class="line">tar -zcf etc.tar.gz /etc &amp;</span><br><span class="line"></span><br><span class="line">top #在top命令的执行过程中，按下crtl+Z快捷键，这种方法在后台是暂停的</span><br></pre></td></tr></table></figure>
+
+<h4 id="12-3-系统资源查看"><a href="#12-3-系统资源查看" class="headerlink" title="12.3 系统资源查看"></a>12.3 系统资源查看</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vmstat [刷新延时 刷新次数]	#vmstat命令监控系统资源</span><br><span class="line"><span class="meta">$</span><span class="bash"> vmstat 1 3</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg	#dmesg开机时内核检测信息</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">free [-b|-k|-m|-g]</span><br><span class="line">选项：</span><br><span class="line">-b： 以字节为单位显示</span><br><span class="line">-k： 以KB为单位显示，默认就是以KB为单位显示</span><br><span class="line">-m： 以MB为单位显示</span><br><span class="line">-g： 以GB为单位显示</span><br></pre></td></tr></table></figure>
+
+<p>缓存（cache）是用来加速数据从硬盘中“读取”的，而缓冲（buffer）是用来加速数据“写入”硬盘的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo	#查看CPU信息</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> uptime	<span class="comment">#显示系统的启动时间和平均负载，也就是top命令的第一行。w命令也可以看到这个数据。</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uname [选项]		#查看系统与内核相关信息</span><br><span class="line">选项：</span><br><span class="line">-a： 查看系统所有相关信息；</span><br><span class="line">-r： 查看内核版本；</span><br><span class="line">-s： 查看内核名称。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file /bin/ls	#判断当前系统的位数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a	#查询当前Linux系统的发行版本</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsof [选项]	#列出进程打开或使用的文件信息</span><br><span class="line">选项：</span><br><span class="line">-c 字符串： 只列出以字符串开头的进程打开的文件</span><br><span class="line">-u 用户名： 只列出某个用户的进程打开的文件</span><br><span class="line">-p pid： 列出某个PID进程打开的文件</span><br></pre></td></tr></table></figure>
+
+<h4 id="12-4-系统定时任务"><a href="#12-4-系统定时任务" class="headerlink" title="12.4 系统定时任务"></a>12.4 系统定时任务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">crond服务管理与访问控制</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> service crond restart</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chkconfig crond on</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">crontab [选项]	#用户的crontab设置</span><br><span class="line">选项：</span><br><span class="line">-e： 编辑crontab定时任务</span><br><span class="line">-l： 查询crontab任务</span><br><span class="line">-r： 删除当前用户所有的crontab任务</span><br><span class="line"></span><br><span class="line"> crontab -e</span><br><span class="line"><span class="meta">#</span><span class="bash">进入crontab编辑界面。会打开vim编辑你的工作。</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>含义</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一个“*”</td>
+<td>一小时当中的第几分钟</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>第二个“*”</td>
+<td>一天当中的第几小时</td>
+<td>0-23</td>
+</tr>
+<tr>
+<td>第三个“*”</td>
+<td>一个月当中的第几天</td>
+<td>1-31</td>
+</tr>
+<tr>
+<td>第四个“*”</td>
+<td>一年当中的第几月</td>
+<td>1-12</td>
+</tr>
+<tr>
+<td>第五个“*”</td>
+<td>一周当中的星期几</td>
+<td>0-7（0和7都代表星期日）</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>特殊符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>代表任何时间。比如第一个“*”就代表一小时中每分钟都执行一次的意思。</td>
+</tr>
+<tr>
+<td>，</td>
+<td>代表不连续的时间。比如“0 8,12,16 * * * 命令”，就代表在每天的8点0分，12点0分，16点0分都执行一次命令</td>
+</tr>
+<tr>
+<td>-</td>
+<td>代表连续的时间范围。比如“0 5 * * 1-6命令”，代表在周一到周六的凌晨5点0分执行命令</td>
+</tr>
+<tr>
+<td>*/n</td>
+<td>代表每隔多久执行一次。比如“*/10 * * * * 命令”，代表每隔10分钟就执行一遍命令</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>45 22 * * * 命令</td>
+<td>在22点45分执行命令</td>
+</tr>
+<tr>
+<td>0 17 * * 1 命令</td>
+<td>每周1 的17点0分执行命令</td>
+</tr>
+<tr>
+<td>0 5 1,15 * * 命令</td>
+<td>每月1号和15号的凌晨5点0分执行命令</td>
+</tr>
+<tr>
+<td>40 4 * * 1-5 命令</td>
+<td>每周一到周五的凌晨4点40分执行命令</td>
+</tr>
+<tr>
+<td>*/10 4 * * * 命令</td>
+<td>每天的凌晨4点，每隔10分钟执行一次命令</td>
+</tr>
+<tr>
+<td>0 0 1,15 * 1 命令</td>
+<td>每月1号和15号，每周1的0点0分都会执行命令。注意：星期几和几号最好不要同时出现，因为他们定义的都是天。非常容易让管理员混乱。</td>
+</tr>
+</tbody></table>
+<h3 id="13-日志管理"><a href="#13-日志管理" class="headerlink" title="13 日志管理"></a>13 日志管理</h3><h4 id="13-1日志管理简介"><a href="#13-1日志管理简介" class="headerlink" title="13.1日志管理简介"></a>13.1日志管理简介</h4><h4 id="13-2-rsyslogd日志服务"><a href="#13-2-rsyslogd日志服务" class="headerlink" title="13.2 rsyslogd日志服务"></a>13.2 rsyslogd日志服务</h4><h4 id="13-3-日志轮替"><a href="#13-3-日志轮替" class="headerlink" title="13.3 日志轮替"></a>13.3 日志轮替</h4><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我滴set咋了？？</p>
+<p>网络服务？？课程？？</p>
+<p>w和who区别</p>
 
   </section>
 
@@ -1296,7 +2198,7 @@ classes that you can use:
 
             <footer class="footer">
 
-    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Dong</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
     
 </footer>
         </div>
