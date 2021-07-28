@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>05_JDBC模板 | Hexo</title>
+  <meta name="description" content="1. Spring JdbcTemplate基本使用1.1 JdbcTemplate概述它是spring框架中提供的一个对象，是对原始繁琐的JdbcAPI对象的简单封装。spring框架为我们提供了很多的操作模板类。例如：操作关系型数据的JdbcTemplate和HibernateTemplate，操作nosql数据库的RedisTemplate，操作消息队列的JmsTemplate等等。 1.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05_JDBC模板">
+<meta property="og:url" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/05_JDBC%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. Spring JdbcTemplate基本使用1.1 JdbcTemplate概述它是spring框架中提供的一个对象，是对原始繁琐的JdbcAPI对象的简单封装。spring框架为我们提供了很多的操作模板类。例如：操作关系型数据的JdbcTemplate和HibernateTemplate，操作nosql数据库的RedisTemplate，操作消息队列的JmsTemplate等等。 1.2">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="en-resource://database/1979:1">
+<meta property="article:published_time" content="2021-07-28T02:34:00.000Z">
+<meta property="article:modified_time" content="2021-07-28T02:43:54.800Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="黑马程序员 SSM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="en-resource://database/1979:1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/05_JDBC%E6%A8%A1%E6%9D%BF/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a><span class="tag-list-count">16</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" style="font-size: 13px;">黑马程序员 SSM</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a><span class="archive-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="title">16_MyBatis注解开发</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:38:21.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/15_MyBatis%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="title">15_MyBatis多表操作</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:38:03.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/14_MyBatis%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B7%B1%E5%85%A5/" class="title">14_MyBatis核心配置文件深入</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:37:21.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/13_MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E6%B7%B1%E5%85%A5%EF%BC%88%E5%8A%A8%E6%80%81SQL%EF%BC%89/" class="title">13_MyBatis映射文件深入（动态SQL）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:36:56.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/12_MyBatis%E7%9A%84Dao%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" class="title">12_MyBatis的Dao层实现方式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:36:30.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-黑马程序员/SSM框架/05_JDBC模板" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      05_JDBC模板
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/05_JDBC%E6%A8%A1%E6%9D%BF/" class="article-date">
+	  <time datetime="2021-07-28T02:34:00.000Z" itemprop="datePublished">2021-07-28</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/05_JDBC%E6%A8%A1%E6%9D%BF/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="1-Spring-JdbcTemplate基本使用"><a href="#1-Spring-JdbcTemplate基本使用" class="headerlink" title="1. Spring JdbcTemplate基本使用"></a>1. Spring JdbcTemplate基本使用</h3><h4 id="1-1-JdbcTemplate概述"><a href="#1-1-JdbcTemplate概述" class="headerlink" title="1.1 JdbcTemplate概述"></a>1.1 JdbcTemplate概述</h4><p>它是spring框架中提供的一个对象，是对原始繁琐的<strong>JdbcAPI</strong>对象的简单封装。spring框架为我们提供了很多的操作模板类。例如：操作关系型数据的<strong>JdbcTemplate</strong>和<strong>HibernateTemplate</strong>，操作<strong>nosql</strong>数据库的<strong>RedisTemplate</strong>，操作消息队列的<strong>JmsTemplat</strong>e等等。</p>
+<h4 id="1-2-JdbcTemplate开发步骤"><a href="#1-2-JdbcTemplate开发步骤" class="headerlink" title="1.2 JdbcTemplate开发步骤"></a>1.2 JdbcTemplate开发步骤</h4><p>①导入spring-jdbc和spring-tx坐标<br>②创建数据库表和实体<br>③创建JdbcTemplate对象<br>④执行数据库操作</p>
+<h4 id="1-3-JdbcTemplate快速入门"><a href="#1-3-JdbcTemplate快速入门" class="headerlink" title="1.3 JdbcTemplate快速入门"></a>1.3 JdbcTemplate快速入门</h4><p>①导入坐标</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--springcontext依赖 c3p0 commosio mysql-connector-java等也需要自己导入，具体参考案例--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--导入spring的jdbc坐标--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span></span></span><br><span class="line"><span class="tag">    &lt;<span class="attr">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--导入spring的tx坐标--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-tx<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>②创建accout表和Accout实体</p>
+<p><img src="en-resource://database/1979:1" alt="9965b02155fad198f80dd07fb0c0e921.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> money;</span><br><span class="line">    <span class="comment">//省略get和set方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>③创建JdbcTemplate对象<br>④执行数据库操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、创建数据源对象</span></span><br><span class="line">ComboPooledDataSource dataSource= <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">dataSource.setDriverClass(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">dataSource.setJdbcUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/test&quot;</span>);</span><br><span class="line">dataSource.setUser(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">dataSource.setPassword(<span class="string">&quot;root&quot;</span>);</span><br><span class="line"><span class="comment">//2、创建JdbcTemplate对象J</span></span><br><span class="line">JdbcTemplate jdbcTemplate= <span class="keyword">new</span> JdbcTemplate();</span><br><span class="line"><span class="comment">//3、设置数据源给JdbcTemplate</span></span><br><span class="line">jdbcTemplate.setDataSource(dataSource);</span><br><span class="line"><span class="comment">//4、执行操作</span></span><br><span class="line">jdbcTemplate.update(<span class="string">&quot;insert into account values(?,?)&quot;</span>,<span class="string">&quot;tom&quot;</span>,<span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-Spring产生JdbcTemplate对象"><a href="#1-4-Spring产生JdbcTemplate对象" class="headerlink" title="1.4 Spring产生JdbcTemplate对象"></a>1.4 Spring产生JdbcTemplate对象</h4><p>我们可以将JdbcTemplate的创建权交给Spring，将数据源DataSource的创建权也交给Spring，在Spring容器内部将数据源DataSource注入到JdbcTemplate模版对象中，配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--数据源DataSource--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClass&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;jdbcUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql:///test&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--JdbcTemplate--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;jdbcTemplate&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.core.JdbcTemplate&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>从容器中获得JdbcTemplate进行添加操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSpringJdbcTemplate</span><span class="params">()</span> <span class="keyword">throws</span> PropertyVetoException</span>&#123;</span><br><span class="line">    ApplicationContext applicationContext= <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">    JdbcTemplate jdbcTemplate= applicationContext.getBean(JdbcTemplate.class);</span><br><span class="line">    jdbcTemplate.update(<span class="string">&quot;insert into account values(?,?)&quot;</span>,<span class="string">&quot;lucy&quot;</span>,<span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据库配置一般与spirng的xml文件分开，使用jdbc.properties文件存储</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">jdbc.driver</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="meta">jdbc.url</span>=<span class="string">jdbc:mysql://localhost:3306/test</span></span><br><span class="line"><span class="meta">jdbc.username</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">jdbc.password</span>=<span class="string">root</span></span><br></pre></td></tr></table></figure>
+
+<p>修改xml文件（熟记）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--添加命名空间--&gt;</span></span><br><span class="line">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://www.springframework.org/schema/context   http://www.springframework.org/schema/context/spring-context.xsd</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--加载jdbc.properties--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath:jdbc.properties&quot;</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--数据源对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClass&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;jdbcUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>    </span><br><span class="line">    <span class="comment">&lt;!--JdbcTemplate--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;jdbcTemplate&quot;</span>     <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.core.JdbcTemplate&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-5-JdbcTemplate的常用操作"><a href="#1-5-JdbcTemplate的常用操作" class="headerlink" title="1.5 JdbcTemplate的常用操作"></a>1.5 JdbcTemplate的常用操作</h3><p>修改操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要导入相关依赖</span></span><br><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(&quot;classpath:applicationContext.xml&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcTemplateCRUDTest</span></span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="comment">//测试修改操作</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        jdbcTemplate.update(<span class="string">&quot;update account set money=? where name=?&quot;</span>,<span class="number">1000</span>,<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除和查询全部操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span></span>&#123;</span><br><span class="line">    jdbcTemplate.update(<span class="string">&quot;delete from account where name=?&quot;</span>,<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;Account&gt; accounts = jdbcTemplate.query(<span class="string">&quot;select *from account&quot;</span>, <span class="keyword">new</span> BeanPropertyRowMapper&lt;Account&gt;(Account.class));</span><br><span class="line">    <span class="keyword">for</span> (Account account: accounts) &#123;</span><br><span class="line">        System.out.println(account.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询单个数据操作操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="comment">//测试查询单个对象操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryOne</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Account account= jdbcTemplate.queryForObject(<span class="string">&quot;select *from account where name=?&quot;</span>, <span class="keyword">new</span> BeanPropertyRowMapper&lt;Account&gt;(Account.class), </span><br><span class="line"><span class="string">&quot;tom&quot;</span>);</span><br><span class="line">    System.out.println(account.getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="comment">//测试查询单个简单数据操作(聚合查询)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Long aLong= jdbcTemplate.queryForObject(<span class="string">&quot;select count(*) from account&quot;</span>, Long.class);</span><br><span class="line">    System.out.println(aLong);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-6-知识要点"><a href="#1-6-知识要点" class="headerlink" title="1.6 知识要点"></a>1.6 知识要点</h4><p>①导入spring-jdbc和spring-tx坐标<br>②创建数据库表和实体<br>③创建JdbcTemplate对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JdbcTemplatejdbcTemplate= <span class="keyword">new</span> JdbcTemplate();</span><br><span class="line">jdbcTemplate.setDataSource(dataSource);</span><br></pre></td></tr></table></figure>
+
+<p>④执行数据库操作</p>
+<ul>
+<li><p>更新操作：<br><code>jdbcTemplate.update(sql,params)</code></p>
+</li>
+<li><p>查询操作：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jdbcTemplate.query(sql,Mapper,params)</span><br><span class="line">jdbcTemplate.queryForObject(sql,Mapper,params)</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/05_JDBC%E6%A8%A1%E6%9D%BF/" title="05_JDBC模板" target="_blank" rel="external">http://example.com/2021/07/28/黑马程序员/SSM框架/05_JDBC模板/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/06_%E7%BB%83%E4%B9%A0/" title="06_练习"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/04_SpringMVC%E7%9A%84%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/" title="04_SpringMVC的请求和响应"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

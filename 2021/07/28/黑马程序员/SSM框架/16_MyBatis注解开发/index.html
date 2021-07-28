@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>16_MyBatis注解开发 | Hexo</title>
+  <meta name="description" content="1.Mybatis的注解开发1.1 MyBatis的常用注解这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样我们就可以减少编写Mapper 映射文件了。我们先围绕一些基本的CRUD来学习，再学习复杂映射多表操作。 @Insert：实现新增@Update：实现更新@Delete：实现删除@Select：实现查询@Result：实现结果集封装@Results：可以与@Result">
+<meta property="og:type" content="article">
+<meta property="og:title" content="16_MyBatis注解开发">
+<meta property="og:url" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.Mybatis的注解开发1.1 MyBatis的常用注解这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样我们就可以减少编写Mapper 映射文件了。我们先围绕一些基本的CRUD来学习，再学习复杂映射多表操作。 @Insert：实现新增@Update：实现更新@Delete：实现删除@Select：实现查询@Result：实现结果集封装@Results：可以与@Result">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2129_2.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2131_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2133_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2135_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2137_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2139_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2141_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2143_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2145_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2147_1.png">
+<meta property="og:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2149_1.png">
+<meta property="article:published_time" content="2021-07-28T02:38:21.000Z">
+<meta property="article:modified_time" content="2021-07-28T02:48:32.028Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="黑马程序员 SSM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2129_2.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a><span class="tag-list-count">16</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" style="font-size: 13px;">黑马程序员 SSM</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a><span class="archive-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="title">16_MyBatis注解开发</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:38:21.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/15_MyBatis%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/" class="title">15_MyBatis多表操作</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:38:03.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/14_MyBatis%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B7%B1%E5%85%A5/" class="title">14_MyBatis核心配置文件深入</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:37:21.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/13_MyBatis%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E6%B7%B1%E5%85%A5%EF%BC%88%E5%8A%A8%E6%80%81SQL%EF%BC%89/" class="title">13_MyBatis映射文件深入（动态SQL）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:36:56.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/12_MyBatis%E7%9A%84Dao%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" class="title">12_MyBatis的Dao层实现方式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-07-28T02:36:30.000Z" itemprop="datePublished">2021-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-黑马程序员/SSM框架/16_MyBatis注解开发" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      16_MyBatis注解开发
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="article-date">
+	  <time datetime="2021-07-28T02:38:21.000Z" itemprop="datePublished">2021-07-28</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="1-Mybatis的注解开发"><a href="#1-Mybatis的注解开发" class="headerlink" title="1.Mybatis的注解开发"></a>1.Mybatis的注解开发</h3><h4 id="1-1-MyBatis的常用注解"><a href="#1-1-MyBatis的常用注解" class="headerlink" title="1.1 MyBatis的常用注解"></a>1.1 MyBatis的常用注解</h4><p>这几年来注解开发越来越流行，Mybatis也可以使用注解开发方式，这样我们就可以减少编写Mapper</p>
+<p>映射文件了。我们先围绕一些基本的CRUD来学习，再学习复杂映射多表操作。</p>
+<p>@Insert：实现新增<br>@Update：实现更新<br>@Delete：实现删除<br>@Select：实现查询<br>@Result：实现结果集封装<br>@Results：可以与@Result 一起使用，封装多个结果集<br>@One：实现一对一结果集封装<br>@Many：实现一对多结果集封装</p>
+<h4 id="1-2-MyBatis的增删改查"><a href="#1-2-MyBatis的增删改查" class="headerlink" title="1.2 MyBatis的增删改查"></a>1.2 MyBatis的增删改查</h4><p>我们完成简单的user表的增删改查的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    InputStream resourceAsStream = Resources.getResourceAsStream(<span class="string">&quot;SqlMapConfig.xml&quot;</span>);</span><br><span class="line">    SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(resourceAsStream);</span><br><span class="line">    SqlSession sqlSession = sqlSessionFactory.openSession(<span class="keyword">true</span>);</span><br><span class="line">    userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setUsername(<span class="string">&quot;测试数据&quot;</span>);</span><br><span class="line">    user.setPassword(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">    user.setBirthday(<span class="keyword">new</span> Date());</span><br><span class="line">    userMapper.add(user);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setId(<span class="number">16</span>);</span><br><span class="line">    user.setUsername(<span class="string">&quot;测试数据修改&quot;</span>);</span><br><span class="line">    user.setPassword(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">    user.setBirthday(<span class="keyword">new</span> Date());</span><br><span class="line">    userMapper.update(user);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    userMapper.delete(<span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindById</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    User user = userMapper.findById(<span class="number">1</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindAll</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    List&lt;User&gt; all = userMapper.findAll();</span><br><span class="line">    <span class="keyword">for</span>(User user : all)&#123;</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改MyBatis的核心配置文件，我们使用了注解替代的映射文件，所以我们只需要加载使用了注解的Mapper接口即可</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--扫描使用注解的类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.mapper.UserMapper&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者指定扫描包含映射关系的接口所在的包也可以</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--扫描使用注解的类所在的包--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.itheima.mapper&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接口中方法上添加注解即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Insert(&quot;insert into user values(#&#123;id&#125;,#&#123;username&#125;,#&#123;password&#125;,#&#123;birthday&#125;)&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Update(&quot;update user set username=#&#123;username&#125;,password=#&#123;password&#125; where id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from user where id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user where id=#&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">findById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-3-MyBatis的注解实现复杂映射开发"><a href="#1-3-MyBatis的注解实现复杂映射开发" class="headerlink" title="1.3 MyBatis的注解实现复杂映射开发"></a>1.3 MyBatis的注解实现复杂映射开发</h4><p>实现复杂关系映射之前我们可以在映射文件中通过配置<resultMap>来实现，使用注解开发后，我们可以使用@Results注解，@Result注解，@One注解，@Many注解组合完成复杂关系的配置</resultMap></p>
+<table>
+<thead>
+<tr>
+<th><strong>注解</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Results</td>
+<td>代替的是标签<resultMap>该注解中可以使用单个@Result注解，也可以使用@Result集合。使用格式：@Results（{@Result（），@Result（）}）或@Results（@Result（））</resultMap></td>
+</tr>
+<tr>
+<td>@Resut</td>
+<td>代替了<id>标签和<result>标签  @Result中属性介绍：  column：数据库的列名  property：需要装配的属性名  one：需要使用的@One  注解（@Result（one=@One）（）））  many：需要使用的@Many  注解（@Result（many=@many）（）））</result></id></td>
+</tr>
+<tr>
+<td>@One （一对一）</td>
+<td>代替了<assocation> 标签，是多表查询的关键，在注解中用来指定子查询返回单一对象。  @One注解属性介绍：  select: 指定用来多表查询的 sqlmapper  使用格式：@Result(column=”  “,property=””,one=@One(select=””))</assocation></td>
+</tr>
+<tr>
+<td>@Many （多对一）</td>
+<td>代替了<collection>标签, 是是多表查询的关键，在注解中用来指定子查询返回对象集合。  使用格式：@Result(property=””,column=””,many=@Many(select=””))</collection></td>
+</tr>
+</tbody></table>
+<h4 id="1-4-一对一查询"><a href="#1-4-一对一查询" class="headerlink" title="1.4 一对一查询"></a>1.4 一对一查询</h4><ol>
+<li>一对一查询的模型</li>
+</ol>
+<p>用户表和订单表的关系为，一个用户有多个订单，一个订单只从属于一个用户<br>一对一查询的需求：查询一个订单，与此同时查询出该订单所属的用户</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2129_2.png" alt="2129_2"></p>
+<ol start="2">
+<li>一对一查询的语句</li>
+</ol>
+<p>对应的sql语句：</p>
+<p><code>select * from orders;</code></p>
+<p><code>select * from user where id=查询出订单的uid;</code></p>
+<p>查询的结果如下：</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2131_1.png" alt="2131_1"></p>
+<p>3.  创建Order和User实体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> Date ordertime;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> total;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//代表当前订单从属于哪一个客户</span></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.  创建OrderMapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OrderMapper</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;Order&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.  使用注解配置Mapper</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2133_1.png" alt="2133_1"></p>
+<p>6.  测试结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSelectOrderAndUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Order&gt; all = orderMapper.findAll();</span><br><span class="line">    <span class="keyword">for</span>(Order order : all)&#123;</span><br><span class="line">        System.out.println(order);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2135_1.png" alt="2135_1"></p>
+<h4 id="1-5-一对多查询"><a href="#1-5-一对多查询" class="headerlink" title="1.5 一对多查询"></a>1.5 一对多查询</h4><ol>
+<li>一对多查询的模型</li>
+</ol>
+<p>用户表和订单表的关系为，一个用户有多个订单，一个订单只从属于一个用户</p>
+<p>一对多查询的需求：查询一个用户，与此同时查询出该用户具有的订单</p>
+<p>![2129_2 (2)](16_MyBatis注解开发/2129_2 (2).png)</p>
+<ol start="2">
+<li>一对多查询的语句</li>
+</ol>
+<p>对应的sql语句：</p>
+<p><code>select * from user;</code></p>
+<p><code>select * from orders where uid=查询出用户的id;</code></p>
+<p>查询的结果如下：</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2137_1.png" alt="2137_1"></p>
+<p>3.  修改User实体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> Date ordertime;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> total;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//代表当前订单从属于哪一个客户</span></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">    <span class="comment">//代表当前用户具备哪些订单</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Order&gt; orderList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.  创建UserMapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;User&gt; <span class="title">findAllUserAndOrder</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>5.  使用注解配置Mapper</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2139_1.png" alt="2139_1"></p>
+<p>6.  测试结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; all = userMapper.findAllUserAndOrder();</span><br><span class="line"><span class="keyword">for</span>(User user : all)&#123;</span><br><span class="line">    System.out.println(user.getUsername());</span><br><span class="line">    List&lt;Order&gt; orderList = user.getOrderList();</span><br><span class="line">    <span class="keyword">for</span>(Order order : orderList)&#123;</span><br><span class="line">        System.out.println(order);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;-----------------------------&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2141_1.png" alt="2141_1"></p>
+<h4 id="1-6-多对多查询"><a href="#1-6-多对多查询" class="headerlink" title="1.6 多对多查询"></a>1.6 多对多查询</h4><ol>
+<li>多对多查询的模型</li>
+</ol>
+<p>用户表和角色表的关系为，一个用户有多个角色，一个角色被多个用户使用</p>
+<p>多对多查询的需求：查询用户同时查询出该用户的所有角色</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2143_1.png" alt="2143_1"></p>
+<ol start="2">
+<li>多对多查询的语句</li>
+</ol>
+<p>对应的sql语句：</p>
+<p><code>select * from user;</code><br><code>select * from role r,user_roleurwhere r.id=ur.role_idand ur.user_id=用户的id</code></p>
+<p>查询的结果如下：</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2145_1.png" alt="2145_1"></p>
+<p>3.  创建Role实体，修改User实体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">    <span class="comment">//代表当前用户具备哪些订单</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Order&gt; orderList;</span><br><span class="line">    <span class="comment">//代表当前用户具备哪些角色</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Role&gt; roleList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String rolename;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>4.  添加UserMapper接口方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;User&gt; <span class="title">findAllUserAndRole</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>5.  使用注解配置Mapper</p>
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2147_1.png" alt="2147_1"></p>
+<p>6.  测试结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">List&lt;User&gt; all = mapper.findAllUserAndRole();</span><br><span class="line"><span class="keyword">for</span>(User user : all)&#123;</span><br><span class="line">    System.out.println(user.getUsername());</span><br><span class="line">    List&lt;Role&gt; roleList = user.getRoleList();</span><br><span class="line">    <span class="keyword">for</span>(Role role : roleList)&#123;</span><br><span class="line">        System.out.println(role);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;----------------------------------&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/2149_1.png" alt="2149_1"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/16_MyBatis%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" title="16_MyBatis注解开发" target="_blank" rel="external">http://example.com/2021/07/28/黑马程序员/SSM框架/16_MyBatis注解开发/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/07/28/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/15_MyBatis%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C/" title="15_MyBatis多表操作"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
