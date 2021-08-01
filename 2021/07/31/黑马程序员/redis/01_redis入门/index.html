@@ -17,20 +17,27 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Hello World | Hexo</title>
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <title>01_redis入门 | Hexo</title>
+  <meta name="description" content="Redis入门Redis 简介12306     问题现象 海量用户 高并发  罪魁祸首——关系型数据库 性能瓶颈：磁盘IO性能低下  扩展瓶颈：数据关系复杂，扩展性差，不便于大规模集群   解决思路Nosql：  降低磁盘IO次数，越低越好  —— 内存存储 去除数据间关系，越简单越好 —— 不存储关系，仅存储数据  NosqlNoSQL：即 Not-Only SQL（ 泛指非关系型的数据库），">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2021/07/26/hello-world/index.html">
+<meta property="og:title" content="01_redis入门">
+<meta property="og:url" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Redis入门Redis 简介12306     问题现象 海量用户 高并发  罪魁祸首——关系型数据库 性能瓶颈：磁盘IO性能低下  扩展瓶颈：数据关系复杂，扩展性差，不便于大规模集群   解决思路Nosql：  降低磁盘IO次数，越低越好  —— 内存存储 去除数据间关系，越简单越好 —— 不存储关系，仅存储数据  NosqlNoSQL：即 Not-Only SQL（ 泛指非关系型的数据库），">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-07-26T13:22:00.116Z">
-<meta property="article:modified_time" content="2021-07-26T13:22:00.116Z">
+<meta property="og:image" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730193933332.png">
+<meta property="og:image" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730180902991.png">
+<meta property="og:image" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730180928793.png">
+<meta property="og:image" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730181014333.png">
+<meta property="og:image" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730181545125.png">
+<meta property="article:published_time" content="2021-07-31T08:47:55.000Z">
+<meta property="article:modified_time" content="2021-07-31T08:53:01.602Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="黑马程序员 redis">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730193933332.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/2021/07/26/hello-world/index.html">
+  <link rel="canonical" href="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -340,14 +347,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-hello-world" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-黑马程序员/redis/01_redis入门" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      01_redis入门
     </h1>
   
 
@@ -355,34 +362,164 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/07/26/hello-world/" class="article-date">
-	  <time datetime="2021-07-26T13:22:00.116Z" itemprop="datePublished">2021-07-26</time>
+	<a href="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2021-07-31T08:47:55.000Z" itemprop="datePublished">2021-07-31</time>
 	</a>
 </span>
         
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-redis/" rel="tag">黑马程序员 redis</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/07/26/hello-world/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="Redis入门"><a href="#Redis入门" class="headerlink" title="Redis入门"></a>Redis入门</h2><h3 id="Redis-简介"><a href="#Redis-简介" class="headerlink" title="Redis 简介"></a>Redis 简介</h3><p>12306    </p>
+<h4 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h4><ul>
+<li>海量用户</li>
+<li>高并发</li>
+</ul>
+<h4 id="罪魁祸首——关系型数据库"><a href="#罪魁祸首——关系型数据库" class="headerlink" title="罪魁祸首——关系型数据库"></a>罪魁祸首——关系型数据库</h4><ul>
+<li><p>性能瓶颈：磁盘IO性能低下</p>
+</li>
+<li><p>扩展瓶颈：数据关系复杂，扩展性差，不便于大规模集群</p>
+</li>
+</ul>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>Nosql：</p>
+<ul>
+<li>降低磁盘IO次数，越低越好  —— 内存存储</li>
+<li>去除数据间关系，越简单越好 —— 不存储关系，仅存储数据</li>
+</ul>
+<h4 id="Nosql"><a href="#Nosql" class="headerlink" title="Nosql"></a>Nosql</h4><p>NoSQL：即 Not-Only SQL（ 泛指非关系型的数据库），作为关系型数据库的补充。</p>
+<p>作用：应对基于海量用户和海量数据前提下的数据处理问题。</p>
+<p>特征：</p>
+<ul>
+<li><p>可扩容，可伸缩</p>
+</li>
+<li><p>大数据量下高性能</p>
+</li>
+<li><p>灵活的数据模型</p>
+</li>
+<li><p>高可用</p>
+</li>
+</ul>
+<p>常见 Nosql 数据库：</p>
+<ul>
+<li>Redis</li>
+<li>memcache</li>
+<li>HBase</li>
+<li>MongoDB</li>
+</ul>
+<h4 id="解决方案（电商场景）"><a href="#解决方案（电商场景）" class="headerlink" title="解决方案（电商场景）"></a>解决方案（电商场景）</h4><p><img src="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730193933332.png" alt="image-20210730193933332"></p>
+<h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><p>概念：Redis (REmote DIctionary Server) 是用 C 语言开发的一个开源的高性能键值对（key-value）数据库。</p>
+<p>特征：</p>
+<ol>
+<li><p>数据间没有必然的关联关系</p>
+</li>
+<li><p>内部采用单线程机制进行工作</p>
+</li>
+<li><p>高性能。官方提供测试数据，50个并发执行100000 个请求,读的速度是110000 次/s,写的速度是81000次/s。</p>
+</li>
+<li><p>多数据类型支持</p>
+<ul>
+<li>字符串类型     string</li>
+<li>列表类型         list</li>
+<li>散列类型         hash</li>
+<li>集合类型         set</li>
+<li>有序集合类型 sorted_set</li>
+</ul>
+</li>
+<li><p>持久化支持。可以进行数据灾难恢复</p>
+</li>
+</ol>
+<h4 id="Redis-的应用"><a href="#Redis-的应用" class="headerlink" title="Redis 的应用"></a>Redis 的应用</h4><ul>
+<li>为热点数据加速查询（主要场景），如热点商品、热点新闻、热点资讯、推广类等高访问量信息等</li>
+<li>任务队列，如秒杀、抢购、购票排队等</li>
+<li>即时信息查询，如各位排行榜、各类网站访问统计、公交到站信息、在线人数信息（聊天室、网站）、设备信号等</li>
+<li>时效性信息控制，如验证码控制、投票控制等</li>
+<li>分布式数据共享，如分布式集群架构中的 session 分离</li>
+<li>消息队列</li>
+<li>分布式锁</li>
+</ul>
+<h3 id="Redis-的下载与安装"><a href="#Redis-的下载与安装" class="headerlink" title="Redis 的下载与安装"></a>Redis 的下载与安装</h3><h4 id="Redis-的下载"><a href="#Redis-的下载" class="headerlink" title="Redis 的下载"></a>Redis 的下载</h4><p>Linux 版（适用于企业级开发）</p>
+<ul>
+<li>Redis 高级开始使用</li>
+<li>以4.0 版本作为主版本</li>
+</ul>
+<p>Windows 版本（适合零基础学习）</p>
+<ul>
+<li>Redis 入门使用</li>
+<li>以 3.2 版本作为主版本</li>
+<li>下载地址：<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech/redis/tags">https://github.com/MSOpenTech/redis/tags</a></li>
+</ul>
+<h4 id="安装-Redis"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis</h4><p><img src="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730180902991.png" alt="image-20210730180902991"></p>
+<h4 id="启动-Redis"><a href="#启动-Redis" class="headerlink" title="启动 Redis"></a>启动 Redis</h4><p>服务器启动</p>
+<p><img src="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730180928793.png" alt="image-20210730180928793"></p>
+<p>端口：6379 PID：随机生成</p>
+<p>客户端连接</p>
+<p><img src="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730181014333.png" alt="image-20210730181014333"></p>
+<h3 id="Redis-的基本操作"><a href="#Redis-的基本操作" class="headerlink" title="Redis 的基本操作"></a>Redis 的基本操作</h3><h4 id="命令行模式工具使用思考"><a href="#命令行模式工具使用思考" class="headerlink" title="命令行模式工具使用思考"></a>命令行模式工具使用思考</h4><ul>
+<li>功能性命令</li>
+<li>清除屏幕信息</li>
+<li>帮助信息查阅</li>
+<li>退出指令</li>
+</ul>
+<h4 id="信息添加"><a href="#信息添加" class="headerlink" title="信息添加"></a>信息添加</h4><ul>
+<li><p>功能：设置 key，value 数据</p>
+</li>
+<li><p>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set key value</span><br></pre></td></tr></table></figure></li>
+<li><p>范例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set name itheima</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="信息查询"><a href="#信息查询" class="headerlink" title="信息查询"></a>信息查询</h4><ul>
+<li><p>功能：根据 key 查询对应的 value，如果不存在，返回空（nil）</p>
+</li>
+<li><p>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get key</span><br></pre></td></tr></table></figure></li>
+<li><p>范例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get name</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="清除屏幕信息"><a href="#清除屏幕信息" class="headerlink" title="清除屏幕信息"></a>清除屏幕信息</h4><ul>
+<li><p>功能：清除屏幕中的信息</p>
+</li>
+<li><p>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="退出客户端命令行模式"><a href="#退出客户端命令行模式" class="headerlink" title="退出客户端命令行模式"></a>退出客户端命令行模式</h4><ul>
+<li><p>功能：退出客户端</p>
+</li>
+<li><p>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">quit </span><br><span class="line">exit </span><br><span class="line">&lt;ESC&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h4><ul>
+<li><p>功能：获取命令帮助文档，获取组中所有命令信息名称</p>
+</li>
+<li><p>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">help 命令名称 </span><br><span class="line">help @组名</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><img src="/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/image-20210730181545125.png" alt="image-20210730181545125"></p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>Redis 入门</strong></p>
+<ol>
+<li>Redis 简介</li>
+<li>Redis 的下载与安装</li>
+<li>Redis 的基本操作</li>
+</ol>
+<ul>
+<li>set/get</li>
+<li>clear</li>
+<li>help</li>
+</ul>
 
       
     </div>
@@ -392,7 +529,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2021/07/26/hello-world/" title="Hello World" target="_blank" rel="external">http://example.com/2021/07/26/hello-world/</a>
+      <a href="http://example.com/2021/07/31/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/01_redis%E5%85%A5%E9%97%A8/" title="01_redis入门" target="_blank" rel="external">http://example.com/2021/07/31/黑马程序员/redis/01_redis入门/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -439,9 +576,13 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2021/07/26/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/01_IoC%E5%92%8CDI/" title="01_IoC和DI"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2021/08/01/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/Spring_boot/SpringBoot_day02/" title="SpringBoot_day02"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
+    
+    <li class="next">
+      <a href="/2021/07/30/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/Spring_boot/SpringBoot_day01/" title="SpringBoot_day01"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
   </ul>
