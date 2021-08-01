@@ -130,7 +130,7 @@
   <url>
     <loc>http://example.com/2021/07/26/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/SSM%E6%A1%86%E6%9E%B6/01_IoC%E5%92%8CDI/</loc>
     
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-07-28</lastmod>
     
   </url>
   
@@ -151,14 +151,14 @@
 
   
   <url>
-    <loc>http://example.com/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/</loc>
+    <loc>http://example.com/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/</loc>
     <lastmod>2021-08-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/</loc>
+    <loc>http://example.com/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/</loc>
     <lastmod>2021-08-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
