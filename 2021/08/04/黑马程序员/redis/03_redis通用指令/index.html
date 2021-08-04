@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>03_redis通用指令 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Redis 通用指令key通用指令key 特征 key是一个字符串，通过key获取redis中保存的数据  key应该设计哪些操作？  对于key自身状态的相关操作，例如：删除，判定存在，获取类型等 对于key有效性控制相关操作，例如：有效期设定，判定是否有效，有效状态的切换等 对于key快速查询操作，例如：按指定策略查询key ……  key 基本操作 删除指定key 1del key 获取ke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03_redis通用指令">
+<meta property="og:url" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/03_redis%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Redis 通用指令key通用指令key 特征 key是一个字符串，通过key获取redis中保存的数据  key应该设计哪些操作？  对于key自身状态的相关操作，例如：删除，判定存在，获取类型等 对于key有效性控制相关操作，例如：有效期设定，判定是否有效，有效状态的切换等 对于key快速查询操作，例如：按指定策略查询key ……  key 基本操作 删除指定key 1del key 获取ke">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-04T10:04:06.000Z">
+<meta property="article:modified_time" content="2021-08-04T10:11:19.965Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="黑马程序员">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-黑马程序员/redis/03_redis通用指令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/03_redis%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2021-08-04T10:04:06.000Z" itemprop="datePublished">2021-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      03_redis通用指令
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Redis-通用指令"><a href="#Redis-通用指令" class="headerlink" title="Redis 通用指令"></a>Redis 通用指令</h2><h3 id="key通用指令"><a href="#key通用指令" class="headerlink" title="key通用指令"></a>key通用指令</h3><h4 id="key-特征"><a href="#key-特征" class="headerlink" title="key 特征"></a>key 特征</h4><ul>
+<li>key是一个字符串，通过key获取redis中保存的数据</li>
+</ul>
+<p><strong>key应该设计哪些操作？</strong></p>
+<ul>
+<li>对于key自身状态的相关操作，例如：删除，判定存在，获取类型等</li>
+<li>对于key有效性控制相关操作，例如：有效期设定，判定是否有效，有效状态的切换等</li>
+<li>对于key快速查询操作，例如：按指定策略查询key</li>
+<li>……</li>
+</ul>
+<h4 id="key-基本操作"><a href="#key-基本操作" class="headerlink" title="key 基本操作"></a>key 基本操作</h4><ul>
+<li><p>删除指定key</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del key</span><br></pre></td></tr></table></figure></li>
+<li><p>获取key是否存在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exists key</span><br></pre></td></tr></table></figure></li>
+<li><p>获取key的类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type key</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="key-扩展操作（时效性控制）"><a href="#key-扩展操作（时效性控制）" class="headerlink" title="key 扩展操作（时效性控制）"></a>key 扩展操作（时效性控制）</h4><ul>
+<li><p>为指定key设置有效期</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expire key seconds</span><br><span class="line">pexpire key milliseconds</span><br><span class="line">expireat key timestamp		#设置时间戳，linux下通常使用时间戳来控制</span><br><span class="line">pexpireat key milliseconds-timestamp</span><br></pre></td></tr></table></figure></li>
+<li><p>获取key的有效时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ttl key 	#key不存在返回-2 key存在返回-1 ，key设置了有效期，返回有效时常</span><br><span class="line">pttl key</span><br></pre></td></tr></table></figure></li>
+<li><p>切换key从时效性转换为永久性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">persist key</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="key-扩展操作（查询模式）"><a href="#key-扩展操作（查询模式）" class="headerlink" title="key 扩展操作（查询模式）"></a>key 扩展操作（查询模式）</h4><ul>
+<li><p>查询key</p>
+<ul>
+<li><pre><code>keys pattern
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 查询模式规则</span><br><span class="line"></span><br><span class="line">  \* 匹配任意数量的任意符号 		?  配合一个任意符号 		[] 匹配一个指定符号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+keys * 查询所有 
+keys it* 查询所有以it开头 
+keys *heima 查询所有以heima结尾 
+keys ??heima 查询所有前面两个字符任意，后面以heima结尾 
+keys user:? 查询所有以user:开头，最后一个字符任意 
+keys u[st]er:1 查询所有以u开头，以er:1结尾，中间包含一个字母，s或t
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### key 其他操作</span><br><span class="line"></span><br><span class="line">- 为key改名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+rename key newkey #会覆盖newkey
+renamenx key newkey        #newkey已拥有会失败
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 对所有key排序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+sort    #用来对列表，集合排序，但并不改变列表集合的顺序
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其他key通用操作</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+help @generic
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 数据库通用指令</span><br><span class="line"></span><br><span class="line">#### 数据库</span><br><span class="line">key 的重复问题</span><br><span class="line"></span><br><span class="line">- key是由程序员定义的</span><br><span class="line">- redis在使用过程中，伴随着操作数据量的增加，会出现大量的数据以及对应的key</span><br><span class="line">- 数据不区分种类、类别混杂在一起，极易出现重复或冲突</span><br><span class="line"></span><br><span class="line">**解决方案**</span><br><span class="line"></span><br><span class="line">- redis为每个服务提供有16个数据库，编号从0到15</span><br><span class="line">- 每个数据库之间的数据相互独立</span><br><span class="line"></span><br><span class="line">#### db 基本操作</span><br><span class="line"></span><br><span class="line">- 切换数据库</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+select index
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其他操作</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+quit
+ping    #测试链接是否联通
+echo message    #原样输出，可以输出日志
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### db 相关操作</span><br><span class="line"></span><br><span class="line">- 数据移动</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+move key db
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 数据清除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+dbsize        #查看库里有多少key
+flushdb        #刷掉现在的数据
+flushall    #刷掉所有数据
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/03_redis%E9%80%9A%E7%94%A8%E6%8C%87%E4%BB%A4/" data-id="ckrxceg5s00018cuy2fp1d4tw" data-title="03_redis通用指令" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/04_jedis/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          04_jedis
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/02_redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">02_redis数据类型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/" rel="tag">黑马程序员 springboot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 15px;">黑马程序员</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" style="font-size: 20px;">黑马程序员 SSM</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/" style="font-size: 10px;">黑马程序员 springboot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">11_主从复制</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/10_%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">10_高级数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/09_redis%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">09_redis服务器配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/08_%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">08_删除策略</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">07_redis事务</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
