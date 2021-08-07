@@ -1498,38 +1498,41 @@ pexpire lock-key milliseconds
 </ul>
 <h4 id="key-扩展操作（查询模式）"><a href="#key-扩展操作（查询模式）" class="headerlink" title="key 扩展操作（查询模式）"></a>key 扩展操作（查询模式）</h4><ul>
 <li><p>查询key</p>
-<ul>
-<li><pre><code>keys pattern
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 查询模式规则</span><br><span class="line"></span><br><span class="line">  \* 匹配任意数量的任意符号 		?  配合一个任意符号 		[] 匹配一个指定符号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-keys * 查询所有 
-keys it* 查询所有以it开头 
-keys *heima 查询所有以heima结尾 
-keys ??heima 查询所有前面两个字符任意，后面以heima结尾 
-keys user:? 查询所有以user:开头，最后一个字符任意 
-keys u[st]er:1 查询所有以u开头，以er:1结尾，中间包含一个字母，s或t
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### key 其他操作</span><br><span class="line"></span><br><span class="line">- 为key改名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-rename key newkey #会覆盖newkey
-renamenx key newkey        #newkey已拥有会失败
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 对所有key排序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-sort    #用来对列表，集合排序，但并不改变列表集合的顺序
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其他key通用操作</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-help @generic
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 数据库通用指令</span><br><span class="line"></span><br><span class="line">#### 数据库</span><br><span class="line">key 的重复问题</span><br><span class="line"></span><br><span class="line">- key是由程序员定义的</span><br><span class="line">- redis在使用过程中，伴随着操作数据量的增加，会出现大量的数据以及对应的key</span><br><span class="line">- 数据不区分种类、类别混杂在一起，极易出现重复或冲突</span><br><span class="line"></span><br><span class="line">**解决方案**</span><br><span class="line"></span><br><span class="line">- redis为每个服务提供有16个数据库，编号从0到15</span><br><span class="line">- 每个数据库之间的数据相互独立</span><br><span class="line"></span><br><span class="line">#### db 基本操作</span><br><span class="line"></span><br><span class="line">- 切换数据库</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-select index
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其他操作</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-quit
-ping    #测试链接是否联通
-echo message    #原样输出，可以输出日志
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### db 相关操作</span><br><span class="line"></span><br><span class="line">- 数据移动</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-move key db
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 数据清除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-dbsize        #查看库里有多少key
-flushdb        #刷掉现在的数据
-flushall    #刷掉所有数据
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keys pattern</span><br></pre></td></tr></table></figure></li>
+<li><p>查询模式规则</p>
+<p>* 匹配任意数量的任意符号         ?  配合一个任意符号         [] 匹配一个指定符号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keys * 查询所有 </span><br><span class="line">keys it* 查询所有以it开头 </span><br><span class="line">keys *heima 查询所有以heima结尾 </span><br><span class="line">keys ??heima 查询所有前面两个字符任意，后面以heima结尾 </span><br><span class="line">keys user:? 查询所有以user:开头，最后一个字符任意 </span><br><span class="line">keys u[st]er:1 查询所有以u开头，以er:1结尾，中间包含一个字母，s或t</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
+<h4 id="key-其他操作"><a href="#key-其他操作" class="headerlink" title="key 其他操作"></a>key 其他操作</h4><ul>
+<li><p>为key改名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rename key newkey #会覆盖newkey</span><br><span class="line">renamenx key newkey		#newkey已拥有会失败</span><br></pre></td></tr></table></figure></li>
+<li><p>对所有key排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort	#用来对列表，集合排序，但并不改变列表集合的顺序</span><br></pre></td></tr></table></figure></li>
+<li><p>其他key通用操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help @generic</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="数据库通用指令"><a href="#数据库通用指令" class="headerlink" title="数据库通用指令"></a>数据库通用指令</h3><h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><p>key 的重复问题</p>
+<ul>
+<li>key是由程序员定义的</li>
+<li>redis在使用过程中，伴随着操作数据量的增加，会出现大量的数据以及对应的key</li>
+<li>数据不区分种类、类别混杂在一起，极易出现重复或冲突</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<ul>
+<li>redis为每个服务提供有16个数据库，编号从0到15</li>
+<li>每个数据库之间的数据相互独立</li>
+</ul>
+<h4 id="db-基本操作"><a href="#db-基本操作" class="headerlink" title="db 基本操作"></a>db 基本操作</h4><ul>
+<li><p>切换数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select index</span><br></pre></td></tr></table></figure></li>
+<li><p>其他操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">quit</span><br><span class="line">ping	#测试链接是否联通</span><br><span class="line">echo message	#原样输出，可以输出日志</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="db-相关操作"><a href="#db-相关操作" class="headerlink" title="db 相关操作"></a>db 相关操作</h4><ul>
+<li><p>数据移动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">move key db</span><br></pre></td></tr></table></figure></li>
+<li><p>数据清除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dbsize		#查看库里有多少key</span><br><span class="line">flushdb		#刷掉现在的数据</span><br><span class="line">flushall	#刷掉所有数据</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
