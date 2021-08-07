@@ -17,9 +17,14 @@
 <meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210803234553228.png">
 <meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210803234638928.png">
 <meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804094954296.png">
+<meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100004054.png">
+<meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100121497.png">
+<meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100510720.png">
+<meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100811798.png">
+<meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804101026777.png">
 <meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804101308938.png">
 <meta property="article:published_time" content="2021-08-04T10:07:30.000Z">
-<meta property="article:modified_time" content="2021-08-04T10:23:20.379Z">
+<meta property="article:modified_time" content="2021-08-07T03:18:49.589Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="黑马程序员">
 <meta property="article:tag" content="redis">
@@ -198,15 +203,27 @@
 <p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804094954296.png" alt="image-20210804094954296"></p>
 <h4 id="主从连接（slave连接master）"><a href="#主从连接（slave连接master）" class="headerlink" title="主从连接（slave连接master）"></a>主从连接（slave连接master）</h4><ul>
 <li><p>方式一：客户端发送命令</p>
-<ul>
-<li>```<br>slaveof <masterip> <masterport><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 方式二：启动服务器参数</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    redis-server -slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></masterport></masterip></li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>方式二：启动服务器参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server -slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>方式三：服务器配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>slave系统信息</p>
 <ul>
-<li>```<br>slaveof <masterip> <masterport><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- slave系统信息</span><br><span class="line"></span><br><span class="line">  - master_link_down_since_seconds</span><br><span class="line">  - masterhost</span><br><span class="line">  - masterport</span><br><span class="line"></span><br><span class="line">- master系统信息</span><br><span class="line"></span><br><span class="line">  - slave_listening_port(多个)</span><br><span class="line"></span><br><span class="line">#### 主从断开连接</span><br><span class="line"></span><br><span class="line">- 客户端发送命令</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    slaveof no one</span><br></pre></td></tr></table></figure></masterport></masterip></li>
+<li>master_link_down_since_seconds</li>
+<li>masterhost</li>
+<li>masterport</li>
 </ul>
 </li>
+<li><p>master系统信息</p>
+<ul>
+<li>slave_listening_port(多个)</li>
+</ul>
+</li>
+</ul>
+<h4 id="主从断开连接"><a href="#主从断开连接" class="headerlink" title="主从断开连接"></a>主从断开连接</h4><ul>
+<li><p>客户端发送命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof no one</span><br></pre></td></tr></table></figure></li>
 <li><p>说明：</p>
 <ul>
 <li> slave断开连接后，不会删除已有数据，只是不再接受master发送的数据</li>
@@ -215,25 +232,153 @@
 </ul>
 <h4 id="授权访问"><a href="#授权访问" class="headerlink" title="授权访问"></a>授权访问</h4><ul>
 <li><p>master客户端发送命令设置密码</p>
-<ul>
-<li>```<br>requirepass <password><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - </span><br><span class="line"></span><br><span class="line">- master配置文件设置密码</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    config set requirepass &lt;password&gt; </span><br><span class="line">    config get requirepass</span><br></pre></td></tr></table></figure></password></li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requirepass &lt;password&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>master配置文件设置密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config set requirepass &lt;password&gt; </span><br><span class="line">config get requirepass</span><br></pre></td></tr></table></figure></li>
 <li><p>slave客户端发送命令设置密码</p>
-<ul>
-<li>```<br>auth <password><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- slave配置文件设置密码</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    masterauth &lt;password&gt;</span><br></pre></td></tr></table></figure></password></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth &lt;password&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>slave配置文件设置密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masterauth &lt;password&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>slave启动服务器设置密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server –a &lt;password&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="阶段二：数据同步阶段工作流程"><a href="#阶段二：数据同步阶段工作流程" class="headerlink" title="阶段二：数据同步阶段工作流程"></a>阶段二：数据同步阶段工作流程</h4><ul>
+<li>在slave初次连接master后，复制master中的所有数据到slave</li>
+<li>将slave的数据库状态更新成master当前的数据库状态</li>
+</ul>
+<h4 id="数据同步阶段工作流程"><a href="#数据同步阶段工作流程" class="headerlink" title="数据同步阶段工作流程"></a>数据同步阶段工作流程</h4><p>步骤1：请求同步数据 </p>
+<p>步骤2：创建RDB同步数据 </p>
+<p>步骤3：恢复RDB同步数据 </p>
+<p>步骤4：请求部分同步数据 </p>
+<p>步骤5：恢复部分同步数据 至此，数据同步工作完成！ </p>
+<p>状态： </p>
+<p>slave： </p>
+<p>​    具有master端全部数据，包含RDB过程接收的数据 </p>
+<p>master： </p>
+<p>​    保存slave当前数据同步的位置 </p>
+<p>总体： 之间完成了数据克隆</p>
+<p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100004054.png" alt="image-20210804100004054"></p>
+<h4 id="数据同步阶段master说明"><a href="#数据同步阶段master说明" class="headerlink" title="数据同步阶段master说明"></a>数据同步阶段master说明</h4><ol>
+<li><p>如果master数据量巨大，数据同步阶段应避开流量高峰期，避免造成master阻塞，影响业务正常执行</p>
+</li>
+<li><p>复制缓冲区大小设定不合理，会导致数据溢出。如进行全量复制周期太长，进行部分复制时发现数据已经存在丢失的情况，必须进行第二次全量复制，致使slave陷入死循环状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repl-backlog-size 1mb</span><br></pre></td></tr></table></figure></li>
+<li><p>master单机内存占用主机内存的比例不应过大，建议使用50%-70%的内存，留下30%-50%的内存用于执行bgsave命令和创建复制缓冲区</p>
+<p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100121497.png" alt="image-20210804100121497"></p>
+</li>
+</ol>
+<h4 id="数据同步阶段slave说明"><a href="#数据同步阶段slave说明" class="headerlink" title="数据同步阶段slave说明"></a>数据同步阶段slave说明</h4><ol>
+<li><p>为避免slave进行全量复制、部分复制时服务器响应阻塞或数据不同步，建议关闭此期间的对外服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slave-serve-stale-data yes|no</span><br></pre></td></tr></table></figure></li>
+<li><p>数据同步阶段，master发送给slave信息可以理解master是slave的一个客户端，主动向slave发送命令</p>
+</li>
+<li><p>多个slave同时对master请求数据同步，master发送的RDB文件增多，会对带宽造成巨大冲击，如果master带宽不足，因此数据同步需要根据业务需求，适量错峰</p>
+</li>
+<li><p>slave过多时，建议调整拓扑结构，由一主多从结构变为树状结构，中间的节点既是master，也是slave。注意使用树状结构时，由于层级深度，导致深度越高的slave与最顶层master间数据同步延迟较大，数据一致性变差，应谨慎选择</p>
+</li>
+</ol>
+<h4 id="阶段三：命令传播阶段"><a href="#阶段三：命令传播阶段" class="headerlink" title="阶段三：命令传播阶段"></a>阶段三：命令传播阶段</h4><ul>
+<li>当master数据库状态被修改后，导致主从服务器数据库状态不一致，此时需要让主从数据同步到一致的状态，同步的动作称为命令传播</li>
+<li>master将接收到的数据变更命令发送给slave，slave接收命令后执行命令</li>
+<li>主从复制过程大体可以分为3个阶段<ul>
+<li>建立连接阶段（即准备阶段）</li>
+<li>数据同步阶段</li>
+<li>命令传播阶段</li>
 </ul>
 </li>
-<li><p>slave启动服务器设置密码</p>
-<ul>
-<li><p>```<br>redis-server –a <password></password></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 阶段二：数据同步阶段工作流程</span><br><span class="line"></span><br><span class="line">- 在slave初次连接master后，复制master中的所有数据到slave</span><br><span class="line">- 将slave的数据库状态更新成master当前的数据库状态</span><br><span class="line"></span><br><span class="line">#### 数据同步阶段工作流程</span><br><span class="line"></span><br><span class="line">步骤1：请求同步数据 </span><br><span class="line"></span><br><span class="line">步骤2：创建RDB同步数据 </span><br><span class="line"></span><br><span class="line">步骤3：恢复RDB同步数据 </span><br><span class="line"></span><br><span class="line">步骤4：请求部分同步数据 </span><br><span class="line"></span><br><span class="line">步骤5：恢复部分同步数据 至此，数据同步工作完成！ </span><br><span class="line"></span><br><span class="line">状态： </span><br><span class="line"></span><br><span class="line">slave： </span><br><span class="line"></span><br><span class="line">​	具有master端全部数据，包含RDB过程接收的数据 </span><br><span class="line"></span><br><span class="line">master： </span><br><span class="line"></span><br><span class="line">​	保存slave当前数据同步的位置 </span><br><span class="line"></span><br><span class="line">总体： 之间完成了数据克隆</span><br><span class="line"></span><br><span class="line">![image-20210804100004054](11_主从复制/image-20210804100004054.png)</span><br><span class="line"></span><br><span class="line">#### 数据同步阶段master说明</span><br><span class="line"></span><br><span class="line">1. 如果master数据量巨大，数据同步阶段应避开流量高峰期，避免造成master阻塞，影响业务正常执行</span><br><span class="line"></span><br><span class="line">2. 复制缓冲区大小设定不合理，会导致数据溢出。如进行全量复制周期太长，进行部分复制时发现数据已经存在丢失的情况，必须进行第二次全量复制，致使slave陷入死循环状态。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>repl-backlog-size 1mb</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. master单机内存占用主机内存的比例不应过大，建议使用50%-70%的内存，留下30%-50%的内存用于执行bgsave命令和创建复制缓冲区</span><br><span class="line"></span><br><span class="line">   ![image-20210804100121497](11_主从复制/image-20210804100121497.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 数据同步阶段slave说明</span><br><span class="line"></span><br><span class="line">1. 为避免slave进行全量复制、部分复制时服务器响应阻塞或数据不同步，建议关闭此期间的对外服务</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>slave-serve-stale-data yes|no</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 数据同步阶段，master发送给slave信息可以理解master是slave的一个客户端，主动向slave发送命令</span><br><span class="line"></span><br><span class="line">3. 多个slave同时对master请求数据同步，master发送的RDB文件增多，会对带宽造成巨大冲击，如果master带宽不足，因此数据同步需要根据业务需求，适量错峰</span><br><span class="line"></span><br><span class="line">4. slave过多时，建议调整拓扑结构，由一主多从结构变为树状结构，中间的节点既是master，也是slave。注意使用树状结构时，由于层级深度，导致深度越高的slave与最顶层master间数据同步延迟较大，数据一致性变差，应谨慎选择</span><br><span class="line"></span><br><span class="line">#### 阶段三：命令传播阶段</span><br><span class="line"></span><br><span class="line">- 当master数据库状态被修改后，导致主从服务器数据库状态不一致，此时需要让主从数据同步到一致的状态，同步的动作称为命令传播</span><br><span class="line">- master将接收到的数据变更命令发送给slave，slave接收命令后执行命令</span><br><span class="line">- 主从复制过程大体可以分为3个阶段</span><br><span class="line">  - 建立连接阶段（即准备阶段）</span><br><span class="line">  - 数据同步阶段</span><br><span class="line">  - 命令传播阶段</span><br><span class="line"></span><br><span class="line">#### 命令传播阶段的部分复制</span><br><span class="line"></span><br><span class="line">- 命令传播阶段出现了断网现象</span><br><span class="line">  - 网络闪断闪连          忽略</span><br><span class="line">  - 短时间网络中断      部分复制</span><br><span class="line">  - 长时间网络中断      全量复制</span><br><span class="line">- 部分复制的三个核心要素</span><br><span class="line">  - 服务器的运行 id（run id）</span><br><span class="line">  - 主服务器的复制积压缓冲区</span><br><span class="line">  - 主从服务器的复制偏移量</span><br><span class="line"></span><br><span class="line">#### 服务器运行ID（runid）</span><br><span class="line"></span><br><span class="line">- 概念：服务器运行ID是每一台服务器每次运行的身份识别码，一台服务器多次运行可以生成多个运行id</span><br><span class="line">- 组成：运行id由40位字符组成，是一个随机的十六进制字符</span><br><span class="line">  - 例如：fdc9ff13b9bbaab28db42b3d50f852bb5e3fcdce</span><br><span class="line">- 作用：运行id被用于在服务器间进行传输，识别身份 </span><br><span class="line">  - 如果想两次操作均对同一台服务器进行，必须每次操作携带对应的运行id，用于对方识别</span><br><span class="line">- 实现方式：运行id在每台服务器启动时自动生成的，master在首次连接slave时，会将自己的运行ID发送给slave，slave保存此ID，通过info Server命令，可以查看节点的runid</span><br><span class="line"></span><br><span class="line">#### 复制缓冲区</span><br><span class="line"></span><br><span class="line">- 概念：复制缓冲区，又名复制积压缓冲区，是一个先进先出（FIFO）的队列，用于存储服务器执行过的命令，每次传播命令，master都会将传播的命令记录下来，并存储在复制缓冲区</span><br><span class="line"></span><br><span class="line">![image-20210804100510720](11_主从复制/image-20210804100510720.png)</span><br><span class="line"></span><br><span class="line">#### 复制缓冲区内部工作原理</span><br><span class="line"></span><br><span class="line">- 组成</span><br><span class="line">  - 偏移量</span><br><span class="line">  - 字节值</span><br><span class="line">- 工作原理</span><br><span class="line">  - 通过offset区分不同的slave当前数据传播的差异</span><br><span class="line">  - master记录已发送的信息对应的offset</span><br><span class="line">  - slave记录已接收的信息对应的offset</span><br><span class="line"></span><br><span class="line">![复制缓冲区/复制积压缓冲区](11_主从复制/image-20210804100811798.png)</span><br><span class="line"></span><br><span class="line">#### 复制缓冲区</span><br><span class="line"></span><br><span class="line">- 概念：复制缓冲区，又名复制积压缓冲区，是一个先进先出（FIFO）的队列，用于存储服务器执行过的命令，每次传播命令，master都会将传播的命令记录下来，并存储在复制缓冲区</span><br><span class="line">  - 复制缓冲区默认数据存储空间大小是1M，由于存储空间大小是固定的，当入队元素的数量大于队列长度时，最先入队的元素会被弹出，而新元素会被放入队列</span><br><span class="line">- 由来：每台服务器启动时，如果开启有AOF或被连接成为master节点，即创建复制缓冲区</span><br><span class="line">- 作用：用于保存master收到的所有指令（仅影响数据变更的指令，例如set，select）</span><br><span class="line">- 数据来源：当master接收到主客户端的指令时，除了将指令执行，会将该指令存储到缓冲区中</span><br><span class="line"></span><br><span class="line">主从服务器复制偏移量（offset）</span><br><span class="line"></span><br><span class="line">- 概念：一个数字，描述复制缓冲区中的指令字节位置</span><br><span class="line">- 分类：</span><br><span class="line">  - master复制偏移量：记录发送给所有slave的指令字节对应的位置（多个）</span><br><span class="line">  - slave复制偏移量：记录slave接收master发送过来的指令字节对应的位置（一个）</span><br><span class="line">- 数据来源： </span><br><span class="line">  - master端：发送一次记录一次 </span><br><span class="line">  - slave端：接收一次记录一次</span><br><span class="line">- 作用：同步信息，比对master与slave的差异，当slave断线后，恢复数据使用</span><br><span class="line"></span><br><span class="line">#### 数据同步+命令传播阶段工作流程</span><br><span class="line"></span><br><span class="line">![image-20210804101026777](11_主从复制/image-20210804101026777.png)</span><br><span class="line"></span><br><span class="line">#### 心跳机制</span><br><span class="line"></span><br><span class="line">- 进入命令传播阶段候，master与slave间需要进行信息交换，使用心跳机制进行维护，实现双方连接保持在线</span><br><span class="line">- master心跳：</span><br><span class="line">  - 指令：PING</span><br><span class="line">  - 周期：由repl-ping-slave-period决定，默认10秒</span><br><span class="line">  - 作用：判断slave是否在线</span><br><span class="line">  - 查询：INFO replication                获取slave最后一次连接时间间隔，lag项维持在0或1视为正常</span><br><span class="line">- slave心跳任务</span><br><span class="line">  - 指令：REPLCONF ACK &#123;offset&#125;</span><br><span class="line">  - 周期：1秒</span><br><span class="line">  - 作用1：汇报slave自己的复制偏移量，获取最新的数据变更指令</span><br><span class="line">  - 作用2：判断master是否在线</span><br><span class="line"></span><br><span class="line">#### 心跳阶段注意事项</span><br><span class="line"></span><br><span class="line">- 当slave多数掉线，或延迟过高时，master为保障数据稳定性，将拒绝所有信息同步操作 </span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    min-slaves-to-write 2 </span><br><span class="line">    min-slaves-max-lag 8</span><br></pre></td></tr></table></figure></li>
-<li><p>slave数量少于2个，或者所有slave的延迟都大于等于10秒时，强制关闭master写功能，停止数据同步</p>
+</ul>
+<h4 id="命令传播阶段的部分复制"><a href="#命令传播阶段的部分复制" class="headerlink" title="命令传播阶段的部分复制"></a>命令传播阶段的部分复制</h4><ul>
+<li>命令传播阶段出现了断网现象<ul>
+<li>网络闪断闪连          忽略</li>
+<li>短时间网络中断      部分复制</li>
+<li>长时间网络中断      全量复制</li>
+</ul>
 </li>
+<li>部分复制的三个核心要素<ul>
+<li>服务器的运行 id（run id）</li>
+<li>主服务器的复制积压缓冲区</li>
+<li>主从服务器的复制偏移量</li>
+</ul>
+</li>
+</ul>
+<h4 id="服务器运行ID（runid）"><a href="#服务器运行ID（runid）" class="headerlink" title="服务器运行ID（runid）"></a>服务器运行ID（runid）</h4><ul>
+<li>概念：服务器运行ID是每一台服务器每次运行的身份识别码，一台服务器多次运行可以生成多个运行id</li>
+<li>组成：运行id由40位字符组成，是一个随机的十六进制字符<ul>
+<li>例如：fdc9ff13b9bbaab28db42b3d50f852bb5e3fcdce</li>
+</ul>
+</li>
+<li>作用：运行id被用于在服务器间进行传输，识别身份 <ul>
+<li>如果想两次操作均对同一台服务器进行，必须每次操作携带对应的运行id，用于对方识别</li>
+</ul>
+</li>
+<li>实现方式：运行id在每台服务器启动时自动生成的，master在首次连接slave时，会将自己的运行ID发送给slave，slave保存此ID，通过info Server命令，可以查看节点的runid</li>
+</ul>
+<h4 id="复制缓冲区"><a href="#复制缓冲区" class="headerlink" title="复制缓冲区"></a>复制缓冲区</h4><ul>
+<li>概念：复制缓冲区，又名复制积压缓冲区，是一个先进先出（FIFO）的队列，用于存储服务器执行过的命令，每次传播命令，master都会将传播的命令记录下来，并存储在复制缓冲区</li>
+</ul>
+<p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100510720.png" alt="image-20210804100510720"></p>
+<h4 id="复制缓冲区内部工作原理"><a href="#复制缓冲区内部工作原理" class="headerlink" title="复制缓冲区内部工作原理"></a>复制缓冲区内部工作原理</h4><ul>
+<li>组成<ul>
+<li>偏移量</li>
+<li>字节值</li>
+</ul>
+</li>
+<li>工作原理<ul>
+<li>通过offset区分不同的slave当前数据传播的差异</li>
+<li>master记录已发送的信息对应的offset</li>
+<li>slave记录已接收的信息对应的offset</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804100811798.png" alt="复制缓冲区/复制积压缓冲区"></p>
+<h4 id="复制缓冲区-1"><a href="#复制缓冲区-1" class="headerlink" title="复制缓冲区"></a>复制缓冲区</h4><ul>
+<li>概念：复制缓冲区，又名复制积压缓冲区，是一个先进先出（FIFO）的队列，用于存储服务器执行过的命令，每次传播命令，master都会将传播的命令记录下来，并存储在复制缓冲区<ul>
+<li>复制缓冲区默认数据存储空间大小是1M，由于存储空间大小是固定的，当入队元素的数量大于队列长度时，最先入队的元素会被弹出，而新元素会被放入队列</li>
+</ul>
+</li>
+<li>由来：每台服务器启动时，如果开启有AOF或被连接成为master节点，即创建复制缓冲区</li>
+<li>作用：用于保存master收到的所有指令（仅影响数据变更的指令，例如set，select）</li>
+<li>数据来源：当master接收到主客户端的指令时，除了将指令执行，会将该指令存储到缓冲区中</li>
+</ul>
+<p>主从服务器复制偏移量（offset）</p>
+<ul>
+<li>概念：一个数字，描述复制缓冲区中的指令字节位置</li>
+<li>分类：<ul>
+<li>master复制偏移量：记录发送给所有slave的指令字节对应的位置（多个）</li>
+<li>slave复制偏移量：记录slave接收master发送过来的指令字节对应的位置（一个）</li>
+</ul>
+</li>
+<li>数据来源： <ul>
+<li>master端：发送一次记录一次 </li>
+<li>slave端：接收一次记录一次</li>
+</ul>
+</li>
+<li>作用：同步信息，比对master与slave的差异，当slave断线后，恢复数据使用</li>
+</ul>
+<h4 id="数据同步-命令传播阶段工作流程"><a href="#数据同步-命令传播阶段工作流程" class="headerlink" title="数据同步+命令传播阶段工作流程"></a>数据同步+命令传播阶段工作流程</h4><p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/image-20210804101026777.png" alt="image-20210804101026777"></p>
+<h4 id="心跳机制"><a href="#心跳机制" class="headerlink" title="心跳机制"></a>心跳机制</h4><ul>
+<li>进入命令传播阶段候，master与slave间需要进行信息交换，使用心跳机制进行维护，实现双方连接保持在线</li>
+<li>master心跳：<ul>
+<li>指令：PING</li>
+<li>周期：由repl-ping-slave-period决定，默认10秒</li>
+<li>作用：判断slave是否在线</li>
+<li>查询：INFO replication                获取slave最后一次连接时间间隔，lag项维持在0或1视为正常</li>
+</ul>
+</li>
+<li>slave心跳任务<ul>
+<li>指令：REPLCONF ACK {offset}</li>
+<li>周期：1秒</li>
+<li>作用1：汇报slave自己的复制偏移量，获取最新的数据变更指令</li>
+<li>作用2：判断master是否在线</li>
+</ul>
+</li>
+</ul>
+<h4 id="心跳阶段注意事项"><a href="#心跳阶段注意事项" class="headerlink" title="心跳阶段注意事项"></a>心跳阶段注意事项</h4><ul>
+<li><p>当slave多数掉线，或延迟过高时，master为保障数据稳定性，将拒绝所有信息同步操作 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min-slaves-to-write 2 </span><br><span class="line">min-slaves-max-lag 8</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>slave数量少于2个，或者所有slave的延迟都大于等于10秒时，强制关闭master写功能，停止数据同步</li>
 </ul>
 </li>
 <li><p>slave数量由slave发送REPLCONF ACK命令做确认</p>
@@ -279,9 +424,40 @@
 <li><p>解决方案</p>
 <ul>
 <li><p>修改复制缓冲区大小</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repl-backlog-size</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
-<li><p>```<br>repl-backlog-size</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 建议设置如下：</span><br><span class="line"></span><br><span class="line">  1. 测算从master到slave的重连平均时长second</span><br><span class="line">  2. 获取master平均每秒产生写命令数据总量write_size_per_second</span><br><span class="line">  3. 最优复制缓冲区空间 = 2 * second * write_size_per_second</span><br><span class="line"></span><br><span class="line">频繁的网络中断（1）</span><br><span class="line"></span><br><span class="line">- 问题现象</span><br><span class="line"></span><br><span class="line">  - master的CPU占用过高 或 slave频繁断开连接</span><br><span class="line"></span><br><span class="line">- 问题原因</span><br><span class="line"></span><br><span class="line">  - slave每1秒发送REPLCONF ACK命令到master</span><br><span class="line">  - 当slave接到了慢查询时（keys * ，hgetall等），会大量占用CPU性能</span><br><span class="line">  - master每1秒调用复制定时函数replicationCron()，比对slave发现长时间没有进行响应</span><br><span class="line"></span><br><span class="line">- 最终结果</span><br><span class="line"></span><br><span class="line">  - master各种资源（输出缓冲区、带宽、连接等）被严重占用</span><br><span class="line"></span><br><span class="line">- 解决方案</span><br><span class="line"></span><br><span class="line">  - 通过设置合理的超时时间，确认是否释放slave </span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    repl-timeout</span><br></pre></td></tr></table></figure></li>
+<li><p>建议设置如下：</p>
+<ol>
+<li>测算从master到slave的重连平均时长second</li>
+<li>获取master平均每秒产生写命令数据总量write_size_per_second</li>
+<li>最优复制缓冲区空间 = 2 * second * write_size_per_second</li>
+</ol>
+</li>
+</ul>
+<p>频繁的网络中断（1）</p>
+<ul>
+<li><p>问题现象</p>
+<ul>
+<li>master的CPU占用过高 或 slave频繁断开连接</li>
+</ul>
+</li>
+<li><p>问题原因</p>
+<ul>
+<li>slave每1秒发送REPLCONF ACK命令到master</li>
+<li>当slave接到了慢查询时（keys * ，hgetall等），会大量占用CPU性能</li>
+<li>master每1秒调用复制定时函数replicationCron()，比对slave发现长时间没有进行响应</li>
+</ul>
+</li>
+<li><p>最终结果</p>
+<ul>
+<li>master各种资源（输出缓冲区、带宽、连接等）被严重占用</li>
+</ul>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>通过设置合理的超时时间，确认是否释放slave </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repl-timeout</span><br></pre></td></tr></table></figure></li>
 <li><p>该参数定义了超时时间的阈值（默认60秒），超过该值，释放slave</p>
 </li>
 </ul>
@@ -303,9 +479,29 @@
 <li><p>解决方案</p>
 <ul>
 <li><p>提高ping指令发送的频度 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repl-ping-slave-period</span><br></pre></td></tr></table></figure></li>
+<li><p>超时时间repl-time的时间至少是ping指令频度的5到10倍，否则slave很容易判定超时</p>
 </li>
-<li><p>```<br>repl-ping-slave-period</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 超时时间repl-time的时间至少是ping指令频度的5到10倍，否则slave很容易判定超时</span><br><span class="line"></span><br><span class="line">#### 数据不一致</span><br><span class="line"></span><br><span class="line">- 问题现象</span><br><span class="line"></span><br><span class="line">  - 多个slave获取相同数据不同步</span><br><span class="line"></span><br><span class="line">- 问题原因</span><br><span class="line"></span><br><span class="line">  - 网络信息不同步，数据发送有延迟</span><br><span class="line"></span><br><span class="line">- 解决方案</span><br><span class="line"></span><br><span class="line">  - 优化主从间的网络环境，通常放置在同一个机房部署，如使用阿里云等云服务器时要注意此现象</span><br><span class="line"></span><br><span class="line">  - 监控主从节点延迟（通过offset）判断，如果slave延迟过大，暂时屏蔽程序对该slave的数据访问 </span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    slave-serve-stale-data yes|no</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="数据不一致"><a href="#数据不一致" class="headerlink" title="数据不一致"></a>数据不一致</h4><ul>
+<li><p>问题现象</p>
+<ul>
+<li>多个slave获取相同数据不同步</li>
+</ul>
+</li>
+<li><p>问题原因</p>
+<ul>
+<li>网络信息不同步，数据发送有延迟</li>
+</ul>
+</li>
+<li><p>解决方案</p>
+<ul>
+<li><p>优化主从间的网络环境，通常放置在同一个机房部署，如使用阿里云等云服务器时要注意此现象</p>
+</li>
+<li><p>监控主从节点延迟（通过offset）判断，如果slave延迟过大，暂时屏蔽程序对该slave的数据访问 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slave-serve-stale-data yes|no</span><br></pre></td></tr></table></figure></li>
 <li><p>开启后仅响应info、slaveof等少数命令（慎用，除非对数据一致性要求很高）</p>
 </li>
 </ul>
@@ -398,7 +594,7 @@
           </li>
         
           <li>
-            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">07_redis事务</a>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">(no title)</a>
           </li>
         
       </ul>

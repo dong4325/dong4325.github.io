@@ -4,21 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>07_redis事务 | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Redis 事务事务简介什么是事务Redis执行指令过程中，多条连续执行的指令被干扰，打断，插队 redis事务就是一个命令执行的队列，将一系列预定义命令包装成一个整体（一个队列）。当执行时，一次性按照添加顺序依次执行，中间不会被打断或者干扰。 一个队列中，一次性、顺序性、排他性的执行一系列命令  事务基本操作事务的边界事务的基本操作 开启事务  &#96;&#96;&#96;multi123456789- 作用   -">
+  <meta name="description" content="Redis 事务事务简介什么是事务Redis执行指令过程中，多条连续执行的指令被干扰，打断，插队 redis事务就是一个命令执行的队列，将一系列预定义命令包装成一个整体（一个队列）。当执行时，一次性按照添加顺序依次执行，中间不会被打断或者干扰。 一个队列中，一次性、顺序性、排他性的执行一系列命令  事务基本操作事务的边界事务的基本操作 开启事务 1multi 作用   设定事务的开启位置，此指令执">
 <meta property="og:type" content="article">
-<meta property="og:title" content="07_redis事务">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Redis 事务事务简介什么是事务Redis执行指令过程中，多条连续执行的指令被干扰，打断，插队 redis事务就是一个命令执行的队列，将一系列预定义命令包装成一个整体（一个队列）。当执行时，一次性按照添加顺序依次执行，中间不会被打断或者干扰。 一个队列中，一次性、顺序性、排他性的执行一系列命令  事务基本操作事务的边界事务的基本操作 开启事务  &#96;&#96;&#96;multi123456789- 作用   -">
+<meta property="og:description" content="Redis 事务事务简介什么是事务Redis执行指令过程中，多条连续执行的指令被干扰，打断，插队 redis事务就是一个命令执行的队列，将一系列预定义命令包装成一个整体（一个队列）。当执行时，一次性按照添加顺序依次执行，中间不会被打断或者干扰。 一个队列中，一次性、顺序性、排他性的执行一系列命令  事务基本操作事务的边界事务的基本操作 开启事务 1multi 作用   设定事务的开启位置，此指令执">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/image-20210801000414947.png">
-<meta property="article:published_time" content="2021-08-04T10:06:24.000Z">
-<meta property="article:modified_time" content="2021-08-04T10:22:05.528Z">
+<meta property="og:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/image-20210801000649399.png">
+<meta property="article:published_time" content="2021-08-04T10:06:24.169Z">
+<meta property="article:modified_time" content="2021-08-07T03:13:03.053Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="黑马程序员">
-<meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/image-20210801000414947.png">
   
@@ -80,22 +79,12 @@
         <section id="main"><article id="post-黑马程序员/redis/07_redis事务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/" class="article-date">
-  <time class="dt-published" datetime="2021-08-04T10:06:24.000Z" itemprop="datePublished">2021-08-04</time>
+  <time class="dt-published" datetime="2021-08-04T10:06:24.169Z" itemprop="datePublished">2021-08-04</time>
 </a>
     
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      07_redis事务
-    </h1>
-  
-
-      </header>
     
     <div class="e-content article-entry" itemprop="articleBody">
       
@@ -105,10 +94,14 @@
 <p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/image-20210801000414947.png" alt="image-20210801000414947"></p>
 <h3 id="事务基本操作"><a href="#事务基本操作" class="headerlink" title="事务基本操作"></a>事务基本操作</h3><h4 id="事务的边界"><a href="#事务的边界" class="headerlink" title="事务的边界"></a>事务的边界</h4><h4 id="事务的基本操作"><a href="#事务的基本操作" class="headerlink" title="事务的基本操作"></a>事务的基本操作</h4><ul>
 <li><p>开启事务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multi</span><br></pre></td></tr></table></figure></li>
+<li><p>作用 </p>
 <ul>
-<li>```<br>multi<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 作用 </span><br><span class="line"></span><br><span class="line">  - 设定事务的开启位置，此指令执行后，后续的所有指令均加入到事务中</span><br><span class="line"></span><br><span class="line">- 执行事务</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    exec</span><br></pre></td></tr></table></figure></li>
+<li>设定事务的开启位置，此指令执行后，后续的所有指令均加入到事务中</li>
 </ul>
 </li>
+<li><p>执行事务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec</span><br></pre></td></tr></table></figure></li>
 <li><p>作用 </p>
 <ul>
 <li>设定事务的结束位置，同时执行事务。与multi成对出现，成对使用 </li>
@@ -121,15 +114,80 @@
 <p><strong>事务定义过程中发现出了问题，怎么办？</strong></p>
 <ul>
 <li><p>取消事务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">discard</span><br></pre></td></tr></table></figure></li>
+<li><p>作用</p>
 <ul>
-<li>```<br>discard<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 作用</span><br><span class="line"></span><br><span class="line">  -  终止当前事务的定义，发生在multi之后，exec之前</span><br><span class="line"></span><br><span class="line">#### 事务的工作流程</span><br><span class="line"></span><br><span class="line">![image-20210801000649399](07_redis事务/image-20210801000649399.png)</span><br><span class="line"></span><br><span class="line">#### 事务的注意事项</span><br><span class="line"></span><br><span class="line">**定义事务的过程中，命令格式输入错误怎么办？**</span><br><span class="line"></span><br><span class="line">- 语法错误 </span><br><span class="line">  - 指命令书写格式有误</span><br><span class="line">- 处理结果 </span><br><span class="line">  - 如果定义的事务中所包含的命令存在语法错误，整体事务中所有命令均不会执行。包括那些语法正确的命令。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**定义事务的过程中，命令执行出现错误怎么办？**</span><br><span class="line"></span><br><span class="line">- 运行错误 </span><br><span class="line">  - 指命令格式正确，但是无法正确的执行。例如对list进行incr操作</span><br><span class="line">- 处理结果 </span><br><span class="line">  - 能够正确运行的命令会执行，运行错误的命令不会被执行</span><br><span class="line"></span><br><span class="line">&gt; 注意：已经执行完毕的命令对应的数据不会自动回滚，需要程序员自己在代码中实现回滚。</span><br><span class="line"></span><br><span class="line">### 手动进行事务回滚</span><br><span class="line"></span><br><span class="line">- 记录操作过程中被影响的数据之前的状态</span><br><span class="line">  - 单数据：string</span><br><span class="line">  - 多数据：hash、list、set、zset</span><br><span class="line">- 设置指令恢复所有的被修改的项</span><br><span class="line">  - 单数据：直接set（注意周边属性，例如时效）</span><br><span class="line">  - 多数据：修改对应值或整体克隆复制</span><br><span class="line"></span><br><span class="line">### 锁</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 基于特定条件的事务执行</span><br><span class="line"></span><br><span class="line">**业务场景**</span><br><span class="line"></span><br><span class="line">天猫双11热卖过程中，对已经售罄的货物追加补货，4个业务员都有权限进行补货。补货的操作可能是一系列的操作，牵扯到多个连续操作，如何保障不会重复操作？</span><br><span class="line"></span><br><span class="line">**业务分析**</span><br><span class="line"></span><br><span class="line">- 多个客户端有可能同时操作同一组数据，并且该数据一旦被操作修改后，将不适用于继续操作</span><br><span class="line">- 在操作之前锁定要操作的数据，一旦发生变化，终止当前操作</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 基于特定条件的事务执行——锁</span><br><span class="line"></span><br><span class="line">**解决方案**</span><br><span class="line"></span><br><span class="line">- 对 key 添加监视锁，在执行exec前如果key发生了变化，终止事务执行</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    watch key1 [key2……]</span><br></pre></td></tr></table></figure></li>
+<li> 终止当前事务的定义，发生在multi之后，exec之前</li>
 </ul>
 </li>
+</ul>
+<h4 id="事务的工作流程"><a href="#事务的工作流程" class="headerlink" title="事务的工作流程"></a>事务的工作流程</h4><p><img src="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/image-20210801000649399.png" alt="image-20210801000649399"></p>
+<h4 id="事务的注意事项"><a href="#事务的注意事项" class="headerlink" title="事务的注意事项"></a>事务的注意事项</h4><p><strong>定义事务的过程中，命令格式输入错误怎么办？</strong></p>
+<ul>
+<li>语法错误 <ul>
+<li>指命令书写格式有误</li>
+</ul>
+</li>
+<li>处理结果 <ul>
+<li>如果定义的事务中所包含的命令存在语法错误，整体事务中所有命令均不会执行。包括那些语法正确的命令。</li>
+</ul>
+</li>
+</ul>
+<p><strong>定义事务的过程中，命令执行出现错误怎么办？</strong></p>
+<ul>
+<li>运行错误 <ul>
+<li>指命令格式正确，但是无法正确的执行。例如对list进行incr操作</li>
+</ul>
+</li>
+<li>处理结果 <ul>
+<li>能够正确运行的命令会执行，运行错误的命令不会被执行</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：已经执行完毕的命令对应的数据不会自动回滚，需要程序员自己在代码中实现回滚。</p>
+</blockquote>
+<h3 id="手动进行事务回滚"><a href="#手动进行事务回滚" class="headerlink" title="手动进行事务回滚"></a>手动进行事务回滚</h3><ul>
+<li>记录操作过程中被影响的数据之前的状态<ul>
+<li>单数据：string</li>
+<li>多数据：hash、list、set、zset</li>
+</ul>
+</li>
+<li>设置指令恢复所有的被修改的项<ul>
+<li>单数据：直接set（注意周边属性，例如时效）</li>
+<li>多数据：修改对应值或整体克隆复制</li>
+</ul>
+</li>
+</ul>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><h4 id="基于特定条件的事务执行"><a href="#基于特定条件的事务执行" class="headerlink" title="基于特定条件的事务执行"></a>基于特定条件的事务执行</h4><p><strong>业务场景</strong></p>
+<p>天猫双11热卖过程中，对已经售罄的货物追加补货，4个业务员都有权限进行补货。补货的操作可能是一系列的操作，牵扯到多个连续操作，如何保障不会重复操作？</p>
+<p><strong>业务分析</strong></p>
+<ul>
+<li>多个客户端有可能同时操作同一组数据，并且该数据一旦被操作修改后，将不适用于继续操作</li>
+<li>在操作之前锁定要操作的数据，一旦发生变化，终止当前操作</li>
+</ul>
+<h4 id="基于特定条件的事务执行——锁"><a href="#基于特定条件的事务执行——锁" class="headerlink" title="基于特定条件的事务执行——锁"></a>基于特定条件的事务执行——锁</h4><p><strong>解决方案</strong></p>
+<ul>
+<li><p>对 key 添加监视锁，在执行exec前如果key发生了变化，终止事务执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch key1 [key2……]</span><br></pre></td></tr></table></figure></li>
 <li><p>取消对所有 key 的监视</p>
-<ul>
-<li>```<br>unwatch<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tips 18：</span><br><span class="line"></span><br><span class="line">- redis 应用基于状态控制的批量任务执行</span><br><span class="line"></span><br><span class="line">#### 基于特定条件的事务执行</span><br><span class="line"></span><br><span class="line">**业务场景**</span><br><span class="line"></span><br><span class="line">天猫双11热卖过程中，对已经售罄的货物追加补货，且补货完成。客户购买热情高涨，3秒内将所有商品购买完毕。本次补货已经将库存全部清空，如何避免最后一件商品不被多人同时购买？【超卖问题】</span><br><span class="line"></span><br><span class="line">**业务分析**</span><br><span class="line"></span><br><span class="line">- 使用watch监控一个key有没有改变已经不能解决问题，此处要监控的是具体数据</span><br><span class="line">- 虽然redis是单线程的，但是多个客户端对同一数据同时进行操作时，如何避免不被同时修改？</span><br><span class="line"></span><br><span class="line">#### 基于特定条件的事务执行——分布式锁</span><br><span class="line"></span><br><span class="line">**解决方案**</span><br><span class="line"></span><br><span class="line">- 使用 setnx 设置一个公共锁 </span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    setnx lock-key value</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unwatch</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
+<p>Tips 18：</p>
+<ul>
+<li>redis 应用基于状态控制的批量任务执行</li>
+</ul>
+<h4 id="基于特定条件的事务执行-1"><a href="#基于特定条件的事务执行-1" class="headerlink" title="基于特定条件的事务执行"></a>基于特定条件的事务执行</h4><p><strong>业务场景</strong></p>
+<p>天猫双11热卖过程中，对已经售罄的货物追加补货，且补货完成。客户购买热情高涨，3秒内将所有商品购买完毕。本次补货已经将库存全部清空，如何避免最后一件商品不被多人同时购买？【超卖问题】</p>
+<p><strong>业务分析</strong></p>
+<ul>
+<li>使用watch监控一个key有没有改变已经不能解决问题，此处要监控的是具体数据</li>
+<li>虽然redis是单线程的，但是多个客户端对同一数据同时进行操作时，如何避免不被同时修改？</li>
+</ul>
+<h4 id="基于特定条件的事务执行——分布式锁"><a href="#基于特定条件的事务执行——分布式锁" class="headerlink" title="基于特定条件的事务执行——分布式锁"></a>基于特定条件的事务执行——分布式锁</h4><p><strong>解决方案</strong></p>
+<ul>
+<li><p>使用 setnx 设置一个公共锁 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setnx lock-key value</span><br></pre></td></tr></table></figure></li>
 <li><p>利用setnx命令的返回值特征，有值则返回设置失败，无值则返回设置成功</p>
 <ul>
 <li>对于返回设置成功的，拥有控制权，进行下一步的具体业务操作</li>
@@ -146,7 +204,7 @@
 <ul>
 <li>redis 应用基于分布式锁对应的场景控制</li>
 </ul>
-<h4 id="基于特定条件的事务执行"><a href="#基于特定条件的事务执行" class="headerlink" title="基于特定条件的事务执行"></a>基于特定条件的事务执行</h4><p>业务场景</p>
+<h4 id="基于特定条件的事务执行-2"><a href="#基于特定条件的事务执行-2" class="headerlink" title="基于特定条件的事务执行"></a>基于特定条件的事务执行</h4><p>业务场景</p>
 <p>依赖分布式锁的机制，某个用户操作时对应客户端宕机，且此时已经获取到锁。如何解决？</p>
 <p><strong>业务分析</strong></p>
 <ul>
@@ -156,13 +214,7 @@
 <h4 id="基于特定条件的事务执行——分布式锁改良"><a href="#基于特定条件的事务执行——分布式锁改良" class="headerlink" title="基于特定条件的事务执行——分布式锁改良"></a>基于特定条件的事务执行——分布式锁改良</h4><p><strong>解决方案</strong></p>
 <ul>
 <li><p>使用 expire 为锁key添加时间限定，到时不释放，放弃锁 </p>
-<ul>
-<li><pre><code>expire lock-key second 
-pexpire lock-key milliseconds
-</code></pre>
-</li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">expire lock-key second </span><br><span class="line">pexpire lock-key milliseconds</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>由于操作通常都是微秒或毫秒级，因此该锁定时间不宜设置过大。具体时间需要业务测试后确认。</p>
 <ul>
@@ -175,12 +227,10 @@ pexpire lock-key milliseconds
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/" data-id="ckrxceg6500098cuyhp9wdpxu" data-title="07_redis事务" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/" data-id="ckrxceg6500098cuyhp9wdpxu" data-title="" class="article-share-link">Share</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li></ul>
-
     </footer>
   </div>
   
@@ -267,7 +317,7 @@ pexpire lock-key milliseconds
           </li>
         
           <li>
-            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">07_redis事务</a>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">(no title)</a>
           </li>
         
       </ul>

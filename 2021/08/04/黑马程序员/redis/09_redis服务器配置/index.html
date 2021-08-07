@@ -6,15 +6,15 @@
   
   <title>09_redis服务器配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行  &#96;&#96;&#96;daemonize yes|no12345- 绑定主机地址  - &#96;&#96;&#96;    bind 127.0.0.1   设置服务器端口号  &#96;&#96;&#96;port 637912345- 设置数据库数量  - &#96;&#96;&#96;    databases 16    日志配置 设置服务器以指定日志记录级别  &#96;&#96;&#96;loglevel debug|verbose">
+  <meta name="description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行 1daemonize yes|no 绑定主机地址 1bind 127.0.0.1 设置服务器端口号 1port 6379 设置数据库数量 1databases 16  日志配置 设置服务器以指定日志记录级别 1loglevel debug|verbose|notice|warning 日志记录文件名  1logfile 端口号.log">
 <meta property="og:type" content="article">
 <meta property="og:title" content="09_redis服务器配置">
 <meta property="og:url" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/09_redis%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行  &#96;&#96;&#96;daemonize yes|no12345- 绑定主机地址  - &#96;&#96;&#96;    bind 127.0.0.1   设置服务器端口号  &#96;&#96;&#96;port 637912345- 设置数据库数量  - &#96;&#96;&#96;    databases 16    日志配置 设置服务器以指定日志记录级别  &#96;&#96;&#96;loglevel debug|verbose">
+<meta property="og:description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行 1daemonize yes|no 绑定主机地址 1bind 127.0.0.1 设置服务器端口号 1port 6379 设置数据库数量 1databases 16  日志配置 设置服务器以指定日志记录级别 1loglevel debug|verbose|notice|warning 日志记录文件名  1logfile 端口号.log">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-04T10:07:01.000Z">
-<meta property="article:modified_time" content="2021-08-04T10:13:51.816Z">
+<meta property="article:modified_time" content="2021-08-07T03:15:03.556Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="黑马程序员">
 <meta property="article:tag" content="redis">
@@ -99,39 +99,30 @@
       
         <h3 id="服务器基础配置"><a href="#服务器基础配置" class="headerlink" title="服务器基础配置"></a>服务器基础配置</h3><h4 id="服务器端设定"><a href="#服务器端设定" class="headerlink" title="服务器端设定"></a>服务器端设定</h4><ul>
 <li><p>设置服务器以守护进程的方式运行</p>
-<ul>
-<li>```<br>daemonize yes|no<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 绑定主机地址</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    bind 127.0.0.1</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes|no</span><br></pre></td></tr></table></figure></li>
+<li><p>绑定主机地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1</span><br></pre></td></tr></table></figure></li>
 <li><p>设置服务器端口号</p>
-<ul>
-<li>```<br>port 6379<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 设置数据库数量</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    databases 16</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">port 6379</span><br></pre></td></tr></table></figure></li>
+<li><p>设置数据库数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">databases 16</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="日志配置"><a href="#日志配置" class="headerlink" title="日志配置"></a>日志配置</h4><ul>
 <li><p>设置服务器以指定日志记录级别</p>
-<ul>
-<li>```<br>loglevel debug|verbose|notice|warning<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 日志记录文件名 </span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    logfile 端口号.log</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loglevel debug|verbose|notice|warning</span><br></pre></td></tr></table></figure></li>
+<li><p>日志记录文件名 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logfile 端口号.log</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>注意：日志级别开发期设置为verbose即可，生产环境中配置为notice，简化日志输出量，降低写日志IO的频度</p>
 <h4 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h4><ul>
 <li><p>设置同一时间最大客户端连接数，默认无限制。当客户端连接到达上限，Redis会关闭新的连接</p>
-<ul>
-<li>```<br>maxclients 0<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 客户端闲置等待最大时长，达到最大值后关闭连接。如需关闭该功能，设置为 0</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    timeout 300</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxclients 0</span><br></pre></td></tr></table></figure></li>
+<li><p>客户端闲置等待最大时长，达到最大值后关闭连接。如需关闭该功能，设置为 0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeout 300</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="多服务器快捷配置"><a href="#多服务器快捷配置" class="headerlink" title="多服务器快捷配置"></a>多服务器快捷配置</h4><ul>
 <li><p>导入并加载指定配置文件信息，用于快速创建redis公共配置较多的redis实例配置文件，便于维护</p>
-<ul>
-<li><pre><code>include /path/server-端口号.conf
-</code></pre>
-</li>
-</ul>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /path/server-端口号.conf</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -229,7 +220,7 @@
           </li>
         
           <li>
-            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">07_redis事务</a>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">(no title)</a>
           </li>
         
       </ul>
