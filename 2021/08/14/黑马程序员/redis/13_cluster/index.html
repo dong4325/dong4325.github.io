@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>13_cluster | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="集群简介现状问题业务发展过程中遇到的峰值瓶颈  redis提供的服务OPS可以达到10万&#x2F;秒，当前业务OPS已经达到10万&#x2F;秒 内存单机容量达到256G，当前业务需求内存容量1T 使用集群的方式可以快速解决上述问题  集群架构 集群就是使用网络将若干台计算机联通起来，并提供统一的管理方式，使其对外呈现单机的服务效果   集群作用 分散单台服务器的访问压力，实现负载均衡 分散单台服务器的存储压力，实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13_cluster">
+<meta property="og:url" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="集群简介现状问题业务发展过程中遇到的峰值瓶颈  redis提供的服务OPS可以达到10万&#x2F;秒，当前业务OPS已经达到10万&#x2F;秒 内存单机容量达到256G，当前业务需求内存容量1T 使用集群的方式可以快速解决上述问题  集群架构 集群就是使用网络将若干台计算机联通起来，并提供统一的管理方式，使其对外呈现单机的服务效果   集群作用 分散单台服务器的访问压力，实现负载均衡 分散单台服务器的存储压力，实">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194159866.png">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194230583.png">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194452995.png">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210812092258054.png">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811213351770.png">
+<meta property="article:published_time" content="2021-08-14T07:56:23.000Z">
+<meta property="article:modified_time" content="2021-08-14T08:00:31.068Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="黑马程序员">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194159866.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-黑马程序员/redis/13_cluster" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/" class="article-date">
+  <time class="dt-published" datetime="2021-08-14T07:56:23.000Z" itemprop="datePublished">2021-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      13_cluster
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="集群简介"><a href="#集群简介" class="headerlink" title="集群简介"></a>集群简介</h3><h4 id="现状问题"><a href="#现状问题" class="headerlink" title="现状问题"></a>现状问题</h4><p>业务发展过程中遇到的峰值瓶颈</p>
+<ul>
+<li>redis提供的服务OPS可以达到10万/秒，当前业务OPS已经达到10万/秒</li>
+<li>内存单机容量达到256G，当前业务需求内存容量1T</li>
+<li>使用集群的方式可以快速解决上述问题</li>
+</ul>
+<h4 id="集群架构"><a href="#集群架构" class="headerlink" title="集群架构"></a>集群架构</h4><ul>
+<li>集群就是使用网络将若干台计算机联通起来，并提供统一的管理方式，使其对外呈现单机的服务效果</li>
+</ul>
+<p><img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194159866.png" alt="image-20210811194159866"></p>
+<h4 id="集群作用"><a href="#集群作用" class="headerlink" title="集群作用"></a>集群作用</h4><ul>
+<li>分散单台服务器的访问压力，实现负载均衡</li>
+<li>分散单台服务器的存储压力，实现可扩展性</li>
+<li>降低单台服务器宕机带来的业务灾难</li>
+</ul>
+<p><img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194230583.png" alt="image-20210811194230583"></p>
+<h3 id="Redis集群结构设计"><a href="#Redis集群结构设计" class="headerlink" title="Redis集群结构设计"></a>Redis集群结构设计</h3><h4 id="数据存储设计"><a href="#数据存储设计" class="headerlink" title="数据存储设计"></a>数据存储设计</h4><ul>
+<li>通过算法设计，计算出key应该保存的位置</li>
+<li>将所有的存储空间计划切割成16384份，每台主机保存一部分 <ul>
+<li>每份代表的是一个存储空间，不是一个key的保存空间</li>
+</ul>
+</li>
+<li>将key按照计算出的结果放到对应的存储空间</li>
+</ul>
+<img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811194452995.png" alt="image-20210811194452995" style="zoom:80%;">
+
+<ul>
+<li>增强可扩展性</li>
+</ul>
+<img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210812092258054.png" alt="image-20210812092258054" style="zoom:50%;">
+
+<h4 id="集群内部通讯设计"><a href="#集群内部通讯设计" class="headerlink" title="集群内部通讯设计"></a>集群内部通讯设计</h4><ul>
+<li>各个数据库相互通信，保存各个库中槽的编号数据</li>
+<li>一次命中，直接返回</li>
+<li>一次未命中，告知具体位置</li>
+</ul>
+<p><img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/image-20210811213351770.png" alt="image-20210811213351770"></p>
+<h3 id="cluster集群结构搭建-没认真看"><a href="#cluster集群结构搭建-没认真看" class="headerlink" title="cluster集群结构搭建(没认真看)"></a>cluster集群结构搭建(没认真看)</h3><h4 id="搭建方式"><a href="#搭建方式" class="headerlink" title="搭建方式"></a>搭建方式</h4><ul>
+<li>原生安装（单条命令）<ul>
+<li>配置服务器（3主3从）</li>
+<li>建立通信（Meet）</li>
+<li>分槽（Slot）</li>
+<li>搭建主从（master-slave）</li>
+</ul>
+</li>
+<li>工具安装（批处理）</li>
+</ul>
+<h4 id="Cluster配置"><a href="#Cluster配置" class="headerlink" title="Cluster配置"></a>Cluster配置</h4><ul>
+<li><p>添加节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster-enabled yes|no</span><br></pre></td></tr></table></figure></li>
+<li><p>cluster配置文件名，该文件属于自动生成，仅用于快速查找文件并查询文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cluster-config-file &lt;filename&gt;</span><br><span class="line">#cluster-config-file node-6379.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>节点服务响应超时时间，用于判定该节点是否下线或切换为从节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster-node-timeout &lt;milliseconds&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>master连接的slave最小数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster-migration-barrier &lt;count&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Cluster节点操作命令"><a href="#Cluster节点操作命令" class="headerlink" title="Cluster节点操作命令"></a>Cluster节点操作命令</h4><ul>
+<li><p>查看集群节点信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster nodes</span><br></pre></td></tr></table></figure></li>
+<li><p>进入一个从节点 redis，切换其主节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster replicate &lt;master-id&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>发现一个新节点，新增主节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster meet ip:port</span><br></pre></td></tr></table></figure></li>
+<li><p>忽略一个没有solt的节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster forget &lt;id&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>手动故障转移</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster failover</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="redis-trib命令"><a href="#redis-trib命令" class="headerlink" title="redis-trib命令"></a>redis-trib命令</h4><ul>
+<li><p>添加节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-trib.rb add-node</span><br></pre></td></tr></table></figure></li>
+<li><p>删除节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-trib.rb del-node  </span><br></pre></td></tr></table></figure></li>
+<li><p>重新分片</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-trib.rb reshard</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/" data-id="cksbhr3k40001f4uy4lfberpv" data-title="13_cluster" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          14_企业级解决方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/12_%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">12_哨兵模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/" rel="tag">黑马程序员 springboot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 15px;">黑马程序员</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" style="font-size: 20px;">黑马程序员 SSM</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/" style="font-size: 10px;">黑马程序员 springboot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">14_企业级解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/">13_cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/12_%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">12_哨兵模式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">11_主从复制</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/10_%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">10_高级数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

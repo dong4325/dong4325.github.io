@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>14_企业级解决方案 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="缓存预热“宕机”服务器启动后迅速宕机 问题排查  请求数量较高  主从之间数据吞吐量较大，数据同步操作频度较高   解决方案 前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用LRU数据删除策略，构建数据留存队列 （例如：storm与kafka配合 ）  准备工作：  将统计结果中的数据分类，根据级别，redis优先加载级别较高的热点数据  利用分布式多服务器同时进行数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14_企业级解决方案">
+<meta property="og:url" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="缓存预热“宕机”服务器启动后迅速宕机 问题排查  请求数量较高  主从之间数据吞吐量较大，数据同步操作频度较高   解决方案 前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用LRU数据删除策略，构建数据留存队列 （例如：storm与kafka配合 ）  准备工作：  将统计结果中的数据分类，根据级别，redis优先加载级别较高的热点数据  利用分布式多服务器同时进行数据">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20210811230048399.png">
+<meta property="og:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20210811232302733.png">
+<meta property="article:published_time" content="2021-08-14T07:56:53.000Z">
+<meta property="article:modified_time" content="2021-08-14T08:01:12.342Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="黑马程序员">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20210811230048399.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-黑马程序员/redis/14_企业级解决方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2021-08-14T07:56:53.000Z" itemprop="datePublished">2021-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      14_企业级解决方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h3><h4 id="“宕机”"><a href="#“宕机”" class="headerlink" title="“宕机”"></a>“宕机”</h4><p>服务器启动后迅速宕机</p>
+<p>问题排查</p>
+<ol>
+<li><p>请求数量较高</p>
+</li>
+<li><p>主从之间数据吞吐量较大，数据同步操作频度较高</p>
+</li>
+</ol>
+<p>解决方案</p>
+<p>前置准备工作：</p>
+<ol>
+<li>日常例行统计数据访问记录，统计访问频度较高的热点数据</li>
+<li>利用LRU数据删除策略，构建数据留存队列 （例如：storm与kafka配合 ）</li>
+</ol>
+<p>准备工作：</p>
+<ol>
+<li><p>将统计结果中的数据分类，根据级别，redis优先加载级别较高的热点数据</p>
+</li>
+<li><p>利用分布式多服务器同时进行数据读取，提速数据加载过程</p>
+</li>
+<li><p>热点数据主从同时预热 </p>
+</li>
+</ol>
+<p>实施：</p>
+<ol>
+<li><p>使用脚本程序固定触发数据预热过程</p>
+</li>
+<li><p>如果条件允许，使用了CDN（内容分发网络），效果会更好</p>
+</li>
+</ol>
+<p>总结</p>
+<p>缓存预热就是系统启动前，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据！</p>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><h4 id="数据库服务器崩溃（1）"><a href="#数据库服务器崩溃（1）" class="headerlink" title="数据库服务器崩溃（1）"></a>数据库服务器崩溃（1）</h4><ol>
+<li><p>系统平稳运行过程中，忽然数据库连接量激增</p>
+</li>
+<li><p>应用服务器无法及时处理请求</p>
+</li>
+<li><p>大量408，500错误页面出现</p>
+</li>
+<li><p>客户反复刷新页面获取数据</p>
+</li>
+<li><p>数据库崩溃</p>
+</li>
+<li><p>应用服务器崩溃</p>
+</li>
+<li><p>重启应用服务器无效</p>
+</li>
+<li><p>Redis服务器崩溃</p>
+</li>
+<li><p>Redis集群崩溃</p>
+</li>
+<li><p>重启数据库后再次被瞬间流量放倒</p>
+</li>
+</ol>
+<p>问题排查</p>
+<ol>
+<li>在一个较短的时间内，缓存中较多的key集中过期</li>
+<li>此周期内请求访问过期的数据，redis未命中，redis向数据库获取数据</li>
+<li>数据库同时接收到大量的请求无法及时处理</li>
+<li>Redis大量请求被积压，开始出现超时现象</li>
+<li>数据库流量激增，数据库崩溃</li>
+<li>重启后仍然面对缓存中无数据可用</li>
+<li>Redis服务器资源被严重占用，Redis服务器崩溃</li>
+<li>Redis集群呈现崩塌，集群瓦解</li>
+<li>应用服务器无法及时得到数据响应请求，来自客户端的请求数量越来越多，应用服务器崩溃</li>
+<li>应用服务器，redis，数据库全部重启，效果不理想</li>
+</ol>
+<p>问题分析</p>
+<ul>
+<li>短时间范围内</li>
+<li>大量key集中过期</li>
+</ul>
+<p>解决方案（道）</p>
+<ol>
+<li>更多的页面静态化处理</li>
+<li>构建多级缓存架构 <ol>
+<li>Nginx缓存+redis缓存+ehcache缓存</li>
+</ol>
+</li>
+<li>检测Mysql严重耗时业务进行优化 <ol>
+<li>对数据库的瓶颈排查：例如超时查询、耗时较高事务等</li>
+</ol>
+</li>
+<li>灾难预警机制 监控redis服务器性能指标<ol>
+<li>CPU占用、CPU使用率</li>
+<li>内存容量</li>
+<li>查询平均响应时间</li>
+<li>线程数</li>
+</ol>
+</li>
+<li>限流、降级 <ol>
+<li>短时间范围内牺牲一些客户体验，限制一部分请求访问，降低应用服务器压力，待业务低速运转后再逐步放开访问</li>
+</ol>
+</li>
+</ol>
+<p>解决方案（术）</p>
+<ol>
+<li><p>LRU与LFU切换</p>
+</li>
+<li><p>数据有效期策略调整</p>
+<ol>
+<li>根据业务数据有效期进行分类错峰，A类90分钟，B类80分钟，C类70分钟</li>
+<li>过期时间使用固定时间+随机值的形式，稀释集中到期的key的数量</li>
+</ol>
+</li>
+<li><p>超热数据使用永久key</p>
+</li>
+<li><p>定期维护（自动+人工） </p>
+<ol>
+<li>对即将过期数据做访问量分析，确认是否延时，配合访问量统计，做热点数据的延时</li>
+</ol>
+</li>
+<li><p>加锁 </p>
+<ol>
+<li>慎用！</li>
+</ol>
+</li>
+</ol>
+<p>总结</p>
+<p>缓存雪崩就是瞬间过期数据量太大，导致对数据库服务器造成压力。如能够有效避免过期时间集中，可以有效解决雪崩现象的出现（约40%），配合其他策略一起使用，并监控服务器的运行数据，根据运行记录做快速调整。</p>
+<p><img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20210811230048399.png" alt="image-20210811230048399"></p>
+<h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><h4 id="数据库服务器崩溃（2）"><a href="#数据库服务器崩溃（2）" class="headerlink" title="数据库服务器崩溃（2）"></a>数据库服务器崩溃（2）</h4><ol>
+<li><p>系统平稳运行过程中</p>
+</li>
+<li><p>数据库连接量瞬间激增</p>
+</li>
+<li><p>Redis服务器无大量key过期</p>
+</li>
+<li><p>Redis内存平稳，无波动</p>
+</li>
+<li><p>Redis服务器CPU正常</p>
+</li>
+<li><p>数据库崩溃</p>
+</li>
+</ol>
+<p>问题排查</p>
+<ol>
+<li><p>Redis中某个key过期，该key访问量巨大</p>
+</li>
+<li><p>多个数据请求从服务器直接压到Redis后，均未命中</p>
+</li>
+<li><p>Redis在短时间内发起了大量对数据库中同一数据的访问</p>
+</li>
+</ol>
+<p>问题分析</p>
+<ul>
+<li>单个key高热数据</li>
+<li>key过期</li>
+</ul>
+<p>解决方案（术）</p>
+<ol>
+<li><p>预先设定 以电商为例，每个商家根据店铺等级，指定若干款主打商品，在购物节期间，加大此类信息key的过期时长 注意：购物节不仅仅指当天，以及后续若干天，访问峰值呈现逐渐降低的趋势</p>
+</li>
+<li><p>现场调整 监控访问量，对自然流量激增的数据延长过期时间或设置为永久性key</p>
+</li>
+<li><p>后台刷新数据 启动定时任务，高峰期来临之前，刷新数据有效期，确保不丢失</p>
+</li>
+<li><p>二级缓存 设置不同的失效时间，保障不会被同时淘汰就行</p>
+</li>
+<li><p>加锁 分布式锁，防止被击穿，但是要注意也是性能瓶颈，慎重！</p>
+</li>
+</ol>
+<p>总结</p>
+<p>缓存击穿就是单个高热数据过期的瞬间，数据访问量较大，未命中redis后，发起了大量对同一数据的数据库访问，导致对数据库服务器造成压力。应对策略应该在业务数据分析与预防方面进行，配合运行监控测试与即时调整策略，毕竟单个key的过期监控难度较高，配合雪崩处理策略即可。</p>
+<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><h4 id="数据库服务器崩溃（3）"><a href="#数据库服务器崩溃（3）" class="headerlink" title="数据库服务器崩溃（3）"></a>数据库服务器崩溃（3）</h4><ol>
+<li><p>系统平稳运行过程中</p>
+</li>
+<li><p>应用服务器流量随时间增量较大</p>
+</li>
+<li><p>Redis服务器命中率随时间逐步降低</p>
+</li>
+<li><p>Redis内存平稳，内存无压力</p>
+</li>
+<li><p>Redis服务器CPU占用激增</p>
+</li>
+<li><p>数据库服务器压力激增</p>
+</li>
+<li><p>数据库崩溃</p>
+</li>
+</ol>
+<p>问题排查</p>
+<ol>
+<li><p>Redis中大面积出现未命中</p>
+</li>
+<li><p>出现非正常URL访问</p>
+</li>
+</ol>
+<p>问题分析</p>
+<ul>
+<li><p>获取的数据在数据库中也不存在，数据库查询未得到对应数据</p>
+</li>
+<li><p>Redis获取到null数据未进行持久化，直接返回</p>
+</li>
+<li><p>下次此类数据到达重复上述过程</p>
+</li>
+<li><p>出现黑客攻击服务器</p>
+</li>
+</ul>
+<p>解决方案（术）</p>
+<ol>
+<li><p>缓存null 对查询结果为null的数据进行缓存（长期使用，定期清理），设定短时限，例如30-60秒，最高5分钟</p>
+</li>
+<li><p>白名单策略</p>
+<ol>
+<li>提前预热各种分类数据id对应的bitmaps，id作为bitmaps的offset，相当于设置了数据白名单。当加载正常数据时，放行，加载异常数据时直接拦截（效率偏低）</li>
+<li>使用布隆过滤器（有关布隆过滤器的命中问题对当前状况可以忽略）</li>
+</ol>
+</li>
+<li><p>实施监控 </p>
+<ol>
+<li>实时监控redis命中率（业务正常范围时，通常会有一个波动值）与null数据的占比<ol>
+<li>非活动时段波动：通常检测3-5倍，超过5倍纳入重点排查对象</li>
+<li>活动时段波动：通常检测10-50倍，超过50倍纳入重点排查对象 </li>
+</ol>
+</li>
+<li>根据倍数不同，启动不同的排查流程。然后使用黑名单进行防控（运营）</li>
+</ol>
+</li>
+<li><p>key加密 问题出现后，临时启动防灾业务key，对key进行业务层传输加密服务，设定校验程序，过来的key校验 例如每天随机分配60个加密串，挑选2到3个，混淆到页面数据id中，发现访问key不满足规则，驳回数据访问</p>
+</li>
+</ol>
+<p>总结</p>
+<p>缓存击穿访问了不存在的数据，跳过了合法数据的redis数据缓存阶段，每次访问数据库，导致对数据库服务器造成压力。通常此类数据的出现量是一个较低的值，当出现此类情况以毒攻毒，并及时报警。应对策略应该在临时预案防范方面多做文章。<br>无论是黑名单还是白名单，都是对整体系统的压力，警报解除后尽快移除。</p>
+<h3 id="性能指标监控"><a href="#性能指标监控" class="headerlink" title="性能指标监控"></a>性能指标监控</h3><p>监控指标</p>
+<ul>
+<li>性能指标：Performance</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>latency</td>
+<td>Redis相应一个请求的时间</td>
+</tr>
+<tr>
+<td>instantaneous_ops_per_sec</td>
+<td>平均每秒处理请求总数</td>
+</tr>
+<tr>
+<td>hit rate(calculated)</td>
+<td>缓存命中率（计算出来的）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>内存指标：Memory</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>used_memory</td>
+<td>已使用内存</td>
+</tr>
+<tr>
+<td>mem_fragmentation_ratio</td>
+<td>内存碎片率</td>
+</tr>
+<tr>
+<td>evicted_keys</td>
+<td>由于最大内存限制被移除的key的数量</td>
+</tr>
+<tr>
+<td>blocked_clients</td>
+<td>由于BLPOP, BRPOP, or BRPOPLPUSH而被阻塞的客户端</td>
+</tr>
+</tbody></table>
+<ul>
+<li>基本活动指标：Basic activity</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>connected_clients</td>
+<td>客户端连接数</td>
+</tr>
+<tr>
+<td>connected_slaves</td>
+<td>Slave数量</td>
+</tr>
+<tr>
+<td>master_last_io_second_ago</td>
+<td>最近一次主从交互之后的秒数</td>
+</tr>
+<tr>
+<td>keyspace</td>
+<td>数据库中的key值总数</td>
+</tr>
+</tbody></table>
+<ul>
+<li>持久性指标：Persistence</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rdb_last_save_time</td>
+<td>最后一次持久化保存到磁盘的时间戳</td>
+</tr>
+<tr>
+<td>rdb_changes_since_last_save</td>
+<td>自最后一次持久化以来数据库的更改数</td>
+</tr>
+</tbody></table>
+<ul>
+<li>错误指标：Error</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rejected_connections</td>
+<td>由于达到maxclient限制而被拒绝的连接数</td>
+</tr>
+<tr>
+<td>keyspace_misses</td>
+<td>Key值查找失败（没有命中）次数</td>
+</tr>
+<tr>
+<td>master_link_down_since_seconds</td>
+<td>主从断开的持续时间（以秒为单位）</td>
+</tr>
+</tbody></table>
+<h4 id="监控方式"><a href="#监控方式" class="headerlink" title="监控方式"></a>监控方式</h4><ul>
+<li>工具<ul>
+<li>Cloud Insight Redis</li>
+<li>Prometheus</li>
+<li>Redis-stat</li>
+<li>Redis-faina</li>
+<li>RedisLive</li>
+<li>zabbix</li>
+</ul>
+</li>
+<li>命令<ul>
+<li>benchmark</li>
+<li>redis cli<ul>
+<li>monitor</li>
+<li>showlog</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="benchmark"><a href="#benchmark" class="headerlink" title="benchmark"></a>benchmark</h4><ul>
+<li>命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark [-h ] [-p ] [-c ] [-n &lt;requests]&gt; [-k ]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>范例1 说明：50个连接，10000次请求对应的性能</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>范例2 说明：100个连接，5000次请求对应的性能</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark -c 100 -n 5000</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20210811232302733.png" alt="image-20210811232302733"></p>
+<h4 id="monitor"><a href="#monitor" class="headerlink" title="monitor"></a>monitor</h4><ul>
+<li>命令  打印服务器调试信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">monitor</span><br></pre></td></tr></table></figure>
+
+<h4 id="showlong"><a href="#showlong" class="headerlink" title="showlong"></a>showlong</h4><ul>
+<li><p>命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showlong [operator]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>get ：获取慢查询日志</li>
+<li>len ：获取慢查询日志条目数</li>
+<li>reset ：重置慢查询日志</li>
+</ul>
+</li>
+<li><p>相关配置</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slowlog-log-slower-than 1000 #设置慢查询的时间下线，单位：微妙 </span><br><span class="line">slowlog-max-len 100 #设置慢查询命令对应的日志显示长度，单位：命令数</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="cksbhr3k50003f4uyconaf1e5" data-title="14_企业级解决方案" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">13_cluster</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">黑马程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" rel="tag">黑马程序员 SSM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/" rel="tag">黑马程序员 springboot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 15px;">黑马程序员</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-SSM/" style="font-size: 20px;">黑马程序员 SSM</a> <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98-springboot/" style="font-size: 10px;">黑马程序员 springboot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">14_企业级解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/">13_cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/12_%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">12_哨兵模式</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">11_主从复制</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/10_%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">10_高级数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

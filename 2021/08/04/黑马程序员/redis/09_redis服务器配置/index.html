@@ -6,15 +6,15 @@
   
   <title>09_redis服务器配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行 1daemonize yes|no 绑定主机地址 1bind 127.0.0.1 设置服务器端口号 1port 6379 设置数据库数量 1databases 16  日志配置 设置服务器以指定日志记录级别 1loglevel debug|verbose|notice|warning 日志记录文件名  1logfile 端口号.log">
+  <meta name="description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行 1daemonize yes|no 绑定主机地址（只能通过该ip访问） 1bind 127.0.0.1 设置服务器端口号 1port 6379 设置数据库数量 1databases 16  日志配置 设置服务器以指定日志记录级别 1loglevel debug|verbose|notice|warning 日志记录文件名  1logfil">
 <meta property="og:type" content="article">
 <meta property="og:title" content="09_redis服务器配置">
 <meta property="og:url" content="http://example.com/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/09_redis%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行 1daemonize yes|no 绑定主机地址 1bind 127.0.0.1 设置服务器端口号 1port 6379 设置数据库数量 1databases 16  日志配置 设置服务器以指定日志记录级别 1loglevel debug|verbose|notice|warning 日志记录文件名  1logfile 端口号.log">
+<meta property="og:description" content="服务器基础配置服务器端设定 设置服务器以守护进程的方式运行 1daemonize yes|no 绑定主机地址（只能通过该ip访问） 1bind 127.0.0.1 设置服务器端口号 1port 6379 设置数据库数量 1databases 16  日志配置 设置服务器以指定日志记录级别 1loglevel debug|verbose|notice|warning 日志记录文件名  1logfil">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-04T10:07:01.000Z">
-<meta property="article:modified_time" content="2021-08-07T03:15:03.556Z">
+<meta property="article:modified_time" content="2021-08-10T01:44:10.386Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="黑马程序员">
 <meta property="article:tag" content="redis">
@@ -100,7 +100,7 @@
         <h3 id="服务器基础配置"><a href="#服务器基础配置" class="headerlink" title="服务器基础配置"></a>服务器基础配置</h3><h4 id="服务器端设定"><a href="#服务器端设定" class="headerlink" title="服务器端设定"></a>服务器端设定</h4><ul>
 <li><p>设置服务器以守护进程的方式运行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes|no</span><br></pre></td></tr></table></figure></li>
-<li><p>绑定主机地址</p>
+<li><p>绑定主机地址（只能通过该ip访问）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1</span><br></pre></td></tr></table></figure></li>
 <li><p>设置服务器端口号</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">port 6379</span><br></pre></td></tr></table></figure></li>
@@ -204,23 +204,23 @@
       <ul>
         
           <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/14_%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">14_企业级解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/13_cluster/">13_cluster</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/14/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/12_%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">12_哨兵模式</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/11_%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">11_主从复制</a>
           </li>
         
           <li>
             <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/10_%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">10_高级数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/09_redis%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">09_redis服务器配置</a>
-          </li>
-        
-          <li>
-            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/08_%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">08_删除策略</a>
-          </li>
-        
-          <li>
-            <a href="/2021/08/04/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/redis/07_redis%E4%BA%8B%E5%8A%A1/">(no title)</a>
           </li>
         
       </ul>
